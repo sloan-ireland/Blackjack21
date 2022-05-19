@@ -12,11 +12,30 @@ Our project consists of a single-player card game of Blackjack. There will be a 
 [DA Document](https://docs.google.com/document/d/14e9wDzL2M29oHePiIcvPqf9Y1P8A0Q__MjswjDk05i8/edit?usp=sharing)
 
 ###### Blackjack rules:
-To come
+The goal of the game is to get (or as close to) 21 with cards without going over while beating the dealer's hand in which case the bet placed by the player before the hand began will be paid by the dealer.
+
+The player to the left goes first and must decide whether to "stand" (not ask for another card) or "hit" (ask for another card in an attempt to get closer to a count of 21, or even hit 21 exactly). They may ask the dealer for additional cards, one at a time, until deciding to stand on the total (if it is 21 or under), or goes "bust" (if it is over 21).
+
+When the dealer has served every player, the dealers face-down card is turned up. If the total is 17 or more, it must stand. If the total is 16 or under, they must take a card. The dealer must continue to take cards until the total is 17 or more, at which point the dealer must stand.
+
+Face cards all count as 10 and all other cards represent their normal value. Ace is the exception as it can be counted as 1 or 11. Its default value is an 11, but if a hand with an Ace (counted as 11) in it busts, the Ace automatically counts as a 1 and the hand is not busted.
+
+Payout: If the player had a natural blackjack (21 was reached between the first two cards) and the dealer doesn't have a natural blackjack the player immediately gets paid 1.5x his original bet. On a normal hand if the player beats the dealer, they get paid 1x their original bet. If they lose the dealer takes the bet. If a push occurs, no money is given or taken.
+
+**Special Plays and Betting Cases**
+
+Disclaimer: Anything listed here below is not supported by the our current blackjack version
+
+Spliting: If a player's first two cards are of the same denomination, such as two jacks or two sixes, they may choose to treat them as two separate hands when their turn comes around. The amount of the original bet then goes on one of the cards, and an equal amount must be placed as a bet on the other card. Note that payouts for natural blackjacks do not apply for split Aces. The dealer can end up with 21 causing a push.
+
+Double-down: Another option open to the player is doubling their bet when the original two cards dealt total 9, 10, or 11. When the player's turn comes, they place a bet equal to the original bet, and the dealer gives the player just one card, which is placed face down and is not turned up until the bets are settled at the end of the hand.
+
 
 ###### Progress Log:
 5/19
+
 Sloan --> Copied the basic group and project info from the google doc to the read me.
+
 Sloan and Nurdaulet --> Worked on prototype to figure out what classes fit together.
 Also created branches and a test file to figure out merge conflicts
 
