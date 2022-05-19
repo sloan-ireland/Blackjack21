@@ -15,7 +15,10 @@ Our project consists of a single-player card game of Blackjack. There will be a 
 To come
 
 ###### Progress Log:
-To come
+5/19
+Sloan --> Copied the basic group and project info from the google doc to the read me.
+Sloan and Nurdaulet --> Worked on prototype to figure out what classes fit together.
+Also created branches and a test file to figure out merge conflicts;
 
 ###### Compile/Run Instructions:
 To come
