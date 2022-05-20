@@ -32,12 +32,18 @@ Double-down: Another option open to the player is doubling their bet when the or
 
 
 ###### Progress Log:
-5/19
+5/18
 
 Sloan --> Copied the basic group and project info from the google doc to the read me.
 
 Sloan and Nurdaulet --> Worked on prototype to figure out what classes fit together.
 Also created branches and a test file to figure out merge conflicts
+
+5/19
+
+Sloan --> Added blackjack rules to the readme
+
+Sloan and Nurdaulet --> Continued working on prototype
 
 ###### Compile/Run Instructions:
 To come
