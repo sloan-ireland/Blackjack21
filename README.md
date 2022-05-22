@@ -45,5 +45,9 @@ Sloan --> Added blackjack rules to the readme
 
 Sloan and Nurdaulet --> Continued working on prototype
 
+5/20
+
+Nurdaulet --> Worked on the Outline methods and classes. Also started working on the Development stages w/ dropdown for status
+
 ###### Compile/Run Instructions:
 To come
