@@ -63,6 +63,11 @@ Nurdaulet & Sloan --> Finished the UML diagram with all written classes and meth
 
 Nurdaulet --> Finished the Development Stages
 
+=-=-=
+5/23
+=-=-=
+
+
 
 ###### Compile/Run Instructions:
 To come
