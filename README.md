@@ -66,6 +66,12 @@ Nurdaulet --> Finished the Development Stages
 
 Sloan --> Added pictures of cards to temporary folder in directory
 
+=-=-=
+5/23
+=-=-=
+
+
+
 
 ###### Compile/Run Instructions:
 To come
