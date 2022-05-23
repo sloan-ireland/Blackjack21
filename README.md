@@ -70,6 +70,7 @@ Sloan --> Added pictures of cards to temporary folder in directory
 -=-=-= 5/23 =-=-=-
 
 
+Nurdaulet --> Created all processing files and imported them into the repository
 
 
 
