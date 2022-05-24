@@ -12,10 +12,12 @@ public class Deck {
   Removes the top card in the stack and returns the card
   **/
   public Card getTopCard() {
-    deck.pop();
+    return deck.pop();
   }
   
-  
+  public int size() {
+    return deck.size();
+  }
   /**
   the deck is refilled with cards from 4 decks in random order
   **/
