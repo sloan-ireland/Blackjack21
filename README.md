@@ -70,7 +70,7 @@ Sloan --> Added pictures of cards to temporary folder in directory
 -=-=-= 5/23 =-=-=-
 
 
-Nurdaulet --> Created all processing files and imported them into the repository
+Nurdaulet --> Created all processing files and imported them into the repository in class. Started and finished working on the Deck class + started working on the Dealer class.
 
 
 
