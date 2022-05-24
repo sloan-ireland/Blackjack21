@@ -5,7 +5,14 @@ public class Hand {
   
   public Hand(int revealedCards) {
     if (revealedCards == 1) {
-      Card temp = 
+      Card temp = daDeck.getTopCard();
+      temp.setReveal(false);
+      currentHand.add(temp);
+      currentHand.add(daDeck.getTopCard());
+    }
+    else {
+      currentHand.add(daDeck.getTopCard());
+      currentHand.add(daDeck.getTopCard());
     }
   }
 }
