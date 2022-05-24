@@ -25,4 +25,11 @@ public class Card {
     return revealed;
   }
   
+  public void setValue(String newVal) {
+    value = newVal;    
+  }
+  
+  public void setReveal(boolean reveal) {
+    revealed = reveal;
+  }
 }
