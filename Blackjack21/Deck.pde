@@ -15,7 +15,9 @@ public class Deck {
     return deck.pop();
   }
   
-  
+  public int size() {
+    return deck.size();
+  }
   /**
   the deck is refilled with cards from 4 decks in random order
   **/
