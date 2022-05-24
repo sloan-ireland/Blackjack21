@@ -13,12 +13,16 @@ public class Card {
     if (value.equals("J") || value.equals("Q") || value.equals("K")) {
       return 10;
     }
-    else if (value.equals("A") {
+    else if (value.equals("A")) {
       return 11;
     }
     else {
       return Integer.parseInt(value);
     }
+  }
+  
+  public boolean isRevealed() {
+    return revealed;
   }
   
 }
