@@ -32,8 +32,8 @@ Double-down: Another option open to the player is doubling their bet when the or
 
 
 ###### Progress Log:
-5/18
-=-=-=
+-=-=-= 5/18 =-=-=-
+
 
 Sloan --> Copied the basic group and project info from the google doc to the read me.
 
@@ -41,30 +41,37 @@ Sloan and Nurdaulet --> Worked on prototype to figure out what classes fit toget
 Also created branches and a test file to figure out merge conflicts
 
 
-5/19
-=-=-=
+-=-=-= 5/19 =-=-=-
+
 
 Sloan --> Added blackjack rules to the readme
 
 Sloan and Nurdaulet --> Continued working on prototype
 
 
-5/20
-=-=-=
+-=-=-= 5/20 =-=-=-
+
 
 Nurdaulet --> Worked on the Outline methods and classes. Also started working on the Development stages w/ dropdown for status
 
 Sloan --> Finished the outline methods
 
 
-5/22
-=-=-=
+-=-=-= 5/22 =-=-=-
+
 
 Nurdaulet & Sloan --> Finished the UML diagram with all written classes and methods
 
 Nurdaulet --> Finished the Development Stages
 
 Sloan --> Added pictures of cards to temporary folder in directory
+
+
+-=-=-= 5/23 =-=-=-
+
+
+Nurdaulet --> Created all processing files and imported them into the repository
+
 
 
 ###### Compile/Run Instructions:
