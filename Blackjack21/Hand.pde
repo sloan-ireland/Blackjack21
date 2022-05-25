@@ -21,7 +21,7 @@ public class Hand {
   public int getSum() {
     return sum;
   }
-  /*
+  
   public void Hit(Deck daDeck) {
     Card daCard = masterDeck.getTopCard();
     if (sum < 22) { 
@@ -35,7 +35,6 @@ public class Hand {
     }
     
   }
-  */
   
   
   
