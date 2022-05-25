@@ -72,9 +72,9 @@ Sloan --> Added pictures of cards to temporary folder in directory
 
 Nurdaulet --> Created all processing files and imported them into the repository in class. Started and finished working on the Deck class + started working on the Dealer class.
 
-
+Sloan --> Finished the card class
 -=-=-= 5/24 =-=-=-
-
+Sloan --> modified the deck class and started working on Hnad class
 
 Nurdaulet --> Finished the Player and Dealer classes
 
