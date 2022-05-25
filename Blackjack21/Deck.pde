@@ -35,6 +35,6 @@ public class Deck {
       }
     }
     Collections.shuffle(list); // list is randomly shuffled
-    deck = new ArrayDeque<>(list); // the shuffled list now becomes a deck (stack)
+    deck = new ArrayDeque<Card>(list); // the shuffled list now becomes a deck (stack)
   }
 }
