@@ -85,5 +85,7 @@ Nurdaulet --> Finished the Player and Dealer classes
 
 -=-=-= 5/25 =-=-=-
 
+Nurdaulet --> Continued working on the Card, Player, Dealer, and Deck classes. Added PImage handling for the cards so you don't have to call the method 53 times for each card. Also added accessor + mutator methods for other classes
+
 ###### Compile/Run Instructions:
 To come
