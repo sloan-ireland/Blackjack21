@@ -17,6 +17,26 @@ public class Player {
     return bet;
   }
   
+  
+  /**
+  returns the value of the wallet
+  **/
+  public int getWallet() {
+    return wallet;
+  }
+  
+  
+  /**
+  Adds an amount to the wallet (could be negative for subtraction)
+  **/
+  public void addWallet(int amount) {
+    wallet += amount;
+  }
+  
+  
+  /**
+  returns the Hand of the player
+  **/
   public Hand getHand() {
     return currentHand;
   }
