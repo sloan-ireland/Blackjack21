@@ -8,7 +8,7 @@ void setup() {
   Card check = masterDeck.getTopCard();
   PImage card;
   card = loadImage(check.getImageString());
-  card.display(0,0);
+  card.display(0,0, card);
   
 }
 
