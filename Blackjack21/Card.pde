@@ -10,8 +10,6 @@ public class Card {
     suit = suit1;
     value = value1;
     revealed = revealed1;
-    String imgString = value1 + "_of_" + suit1 + ".png";
-    image = loadImage(imgString);
     if (value1.equals("ace")) {
       isAce = true;
       countedAs = 11;
@@ -60,5 +58,10 @@ public class Card {
   
   public PImage getImage() {
     return image;
+  }
+  
+  public String getImageString() {
+    String imgString = value + "_of_" + suit + ".png";
+    return imgString;
   }
 }
