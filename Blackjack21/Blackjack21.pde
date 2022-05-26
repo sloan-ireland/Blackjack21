@@ -18,6 +18,18 @@ void checkBlackjack() {
   if (playerBJ && !houseBJ) {
     thePlayer.addWallet((int)(thePlayer.getbet() * 1.5));
   }
-  else if (!playerBJ && houseBJ) {
+  else if (playerBJ && houseBJ) {
+    thePlayer.addWallet(thePlayer.getbet());
   }
+  else {
+    play();
+  }
+}
+
+void play() {
+
+}
+
+void endRound(int mode) {
+
 }
