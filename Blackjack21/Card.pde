@@ -9,7 +9,7 @@ public class Card {
     suit = suit1;
     value = value1;
     revealed = revealed1;
-    if (value1.equals("A")) {
+    if (value1.equals("ace")) {
       isAce = true;
       countedAs = 11;
     }
@@ -20,10 +20,10 @@ public class Card {
   }
   
   public int getValue() {
-    if (value.equals("J") || value.equals("Q") || value.equals("K")) {
+    if (value.equals("jack") || value.equals("queen") || value.equals("king")) {
       return 10;
     }
-    else if (value.equals("A")) {
+    else if (value.equals("ace")) {
       return 11;
     }
     else {
