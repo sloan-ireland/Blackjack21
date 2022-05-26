@@ -23,8 +23,8 @@ public class Deck {
   **/
   public void refill() {
     ArrayList<Card> list = new ArrayList<Card>();
-    String[] cards = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"};
-    String[] suit = {"Diamonds", "Hearts", "Clubs", "Spades"};
+    String[] cards = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "jack", "queen", "king", "ace"};
+    String[] suit = {"diamonds", "hearts", "clubs", "spades"};
     // This loop adds 4 sets of cards into the list
     for (int z = 0; z < 4; z++) {
       for (int i = 0; i < suit.length; i++) {
