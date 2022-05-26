@@ -5,6 +5,11 @@ Player thePlayer = new Player();
 void setup() {
   size(1000,800);
   background(#39FF14);
+  Card check = masterDeck.getTopCard();
+  PImage card;
+  card = loadImage(check.getImageString());
+  card.display(0,0);
+  
 }
 
 
