@@ -22,6 +22,20 @@ public class Hand {
     return sum;
   }
   
+  public boolean hasBlackjack() {
+    boolean hasAce = false;
+    boolean has10 = false;
+    for (int i = 0; i < currentHand.size(); i++) {
+      if (currentHand.get(i).getValue() == 11) {
+        hasAce = true;
+      }
+      if (currentHand.get(i).getValue() == 10) {
+        has10 = true;
+      }
+    }
+    return hasAce && has10;
+  }
+  
   public boolean AceValChecker() {
   for (int i = 0; i < currentHand.size(); i++) {
     if (currentHand.get(i).getValue() == 11 && currentHand.get(i).countedAs() == 11) {
