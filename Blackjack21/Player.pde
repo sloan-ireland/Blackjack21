@@ -17,6 +17,10 @@ public class Player {
     return bet;
   }
   
+  public Hand getHand() {
+    return currentHand;
+  }
+  
   /**
   Withdraw bet amount from wallet and changes bet to the bet value
   IllegalArgumentException is thrown: bet is greater than the wallet
