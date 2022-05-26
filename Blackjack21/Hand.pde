@@ -18,6 +18,9 @@ public class Hand {
     sum = currentHand.get(0).getValue() + currentHand.get(1).getValue();
   }
   
+  public Card getCard(int card) {
+    return currentHand.get(card);
+  }
   public int getSum() {
     return sum;
   }
