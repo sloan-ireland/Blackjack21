@@ -4,4 +4,8 @@ public class Dealer {
   public Dealer() {
     theHouse = new Hand(1);
   }
+  
+  public Hand getHand() {
+    return theHouse;
+  }
 }
