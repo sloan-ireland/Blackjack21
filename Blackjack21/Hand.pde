@@ -22,15 +22,42 @@ public class Hand {
     return sum;
   }
   
+  public boolean AceValChecker() {
+  for (int i = 0; i < currentHand.size(); i++) {
+    if (currentHand.get(i).getValue() == 11 && currentHand.get(i).countedAs() == 11) {
+      return true;
+    }
+  }
+  return false;
+  }
   public void Hit(Deck daDeck) {
     Card daCard = masterDeck.getTopCard();
-    if (sum < 22) { 
-      if (daDeck.size() == 0) {
+    if (daDeck.size() == 0) {
         daDeck.refill();
       }
+    if (sum < 22) { 
       currentHand.add(daCard);
-      if (daCard.getValue() != 11) {
-        
+      if (daCard.getValue() == 11 && sum < 11) {
+        sum += 11;
+      }
+      else if (daCard.getValue() == 11 && sum > 10) {
+        sum += 1;
+        currentHand.get(currentHand.size() -1).countedAs(1);
+      }
+      else {
+        sum += daCard.getValue();
+      }
+      if (AceValChecker() && sum > 21) {
+        sum -= 10;
+        int counter = 0;
+        int stop = 0;
+        while (stop == 0) {
+          if (currentHand.get(counter).countedAs() == 11) {
+            currentHand.get(counter).countedAs(1);
+            stop  = 1;
+          }
+          counter++;
+        }
       }
     }
     
