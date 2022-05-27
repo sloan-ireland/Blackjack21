@@ -5,11 +5,22 @@ Player thePlayer = new Player();
 void setup() {
   size(1000,800);
   background(#39FF14);
-  Card check = masterDeck.getTopCard();
-  PImage card;
-  card = loadImage(check.getImageString());
-  card.display(0,0, card);
+  //Card check = masterDeck.getTopCard();
+  //PImage card;
+  //card = loadImage("Cards/"+check.getImageString());
+  //card.resize(100,140);
+  //image(card,0,0);
   
+  for (int i = 0; i < masterDeck.size(); i++) {
+    Card check = masterDeck.getTopCard();
+    if (i % 2 == 0) {
+      check.setReveal(false);
+    }
+    PImage card;
+    card = loadImage("Cards/"+check.getImageString());
+    card.resize(100,145);
+    image(card,(i*120),0);
+  }
 }
 
 
