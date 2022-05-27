@@ -21,6 +21,10 @@ public class Hand {
   public Card getCard(int card) {
     return currentHand.get(card);
   }
+  
+  public int getHandLength() {
+    return currentHand.size();
+  }
   public int getSum() {
     return sum;
   }
