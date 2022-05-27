@@ -13,6 +13,9 @@ void setup() {
   
   for (int i = 0; i < masterDeck.size(); i++) {
     Card check = masterDeck.getTopCard();
+    if (i % 2 == 0) {
+      check.setReveal(false);
+    }
     PImage card;
     card = loadImage("Cards/"+check.getImageString());
     card.resize(100,145);
