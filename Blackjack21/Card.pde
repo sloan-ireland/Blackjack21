@@ -61,6 +61,9 @@ public class Card {
   }
   
   public String getImageString() {
+    if (!revealed) {
+      return "back.png";
+    }
     String imgString = value + "_of_" + suit + ".png";
     return imgString;
   }
