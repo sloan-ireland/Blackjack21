@@ -85,11 +85,21 @@ Nurdaulet --> Finished the Player and Dealer classes
 
 -=-=-= 5/25 =-=-=-
 
+
 Nurdaulet --> Continued working on the Card, Player, Dealer, and Deck classes. Added PImage handling for the cards so you don't have to call the method 53 times for each card. Also added accessor + mutator methods for other classes
 
 Sloan -- > finished the Hand class. modified other classes with additional methods as nessesary to help in hand class (e.g checkBlackjack). started methods in blackjack21
 
-5/26
+
+=-=-=- 5/26 =-=-=-
 Sloan --> Continued working on main Blackjack21 file. spent time playing around with PImages and how to display them outside of calling them in set up. Read documentation
+
+
+-=-=-= 5/26-27 =-=-=-
+
+Nurdaulet --> Tested PImage assigning and loading inside setup() when drawing a card from deck.
+
+=-=-=- 5/27 =-=-=-
+Sloan --> Added banner and cardset up methods. played around with display functions for showing game functionality.
 ###### Compile/Run Instructions:
 To come
