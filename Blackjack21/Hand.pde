@@ -56,7 +56,7 @@ public class Hand {
     if (daDeck.size() == 0) {
         daDeck.refill();
       }
-    if (sum < 22) { 
+    if (sum < 21) { 
       currentHand.add(daCard);
       if (daCard.getValue() == 11 && sum < 11) {
         sum += 11;
