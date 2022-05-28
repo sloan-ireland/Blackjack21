@@ -1,31 +1,58 @@
 Deck masterDeck = new Deck();
 Dealer theHouse = new Dealer();
 Player thePlayer = new Player();
+boolean roundOver = false;
+
+PImage back; 
 
 void setup() {
-  size(1000,800);
-  background(#39FF14);
-  //Card check = masterDeck.getTopCard();
-  //PImage card;
-  //card = loadImage("Cards/"+check.getImageString());
-  //card.resize(100,140);
-  //image(card,0,0);
+  back = loadImage("Cards/back.png");
+  back.resize(120, 174); 
+  size(1000, 800);
+  background(#39FF20);
   
-  for (int i = 0; i < masterDeck.size(); i++) {
-    Card check = masterDeck.getTopCard();
-    if (i % 2 == 0) {
-      check.setReveal(false);
-    }
-    PImage card;
-    card = loadImage("Cards/"+check.getImageString());
-    card.resize(100,145);
-    image(card,(i*120),0);
-  }
+  banner();
 }
 
+void banner() {
+  String title = "The Game of Blackjack";
+  fill(255);
+  rect(250,5,500,75);
+  fill(0);
+  textSize(40);
+  textAlign(CENTER);
+  text(title, 500, 45);
+  textSize(20);
+  text("The House Always Wins! Play at your own risk :-)", 500,70);
+}
 
+void handSetup() {
+  textAlign(LEFT);
+  text("The Dealer", 450, 120);
+  displayCards(theHouse.getHand(), 430, 130);
+  text("Player", 470,700);
+  displayCards(thePlayer.getHand(),430, 500);
+}
 void draw() {
+  noLoop();
+  handSetup();
+}
 
+void keyPressed() {
+  
+}
+
+void displayCards(Hand daHand, float x, float y) {
+  for (int i = 0, j = 0; i < daHand.getHandLength(); i++, j += 50) {
+    PImage card = loadImage("Cards/" + daHand.getCard(i).getImageString());
+    card.resize(120, 174);
+    if (daHand.getCard(i).isRevealed()) {
+      image(card, x +j, y);
+    }
+    else {
+      image(back,x +j ,y);
+    }
+  }
 }
 
 void checkBlackjack() {
@@ -33,19 +60,15 @@ void checkBlackjack() {
   boolean houseBJ = theHouse.getHand().hasBlackjack();
   if (playerBJ && !houseBJ) {
     thePlayer.addWallet((int)(thePlayer.getbet() * 1.5));
-  }
-  else if (playerBJ && houseBJ) {
+  } else if (playerBJ && houseBJ) {
     thePlayer.addWallet(thePlayer.getbet());
-  }
-  else {
+  } else {
     play();
   }
 }
 
 void play() {
-
 }
 
 void endRound(int mode) {
-
 }
