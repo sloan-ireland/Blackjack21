@@ -10,7 +10,6 @@ void setup() {
   back.resize(120, 174); 
   size(1000, 800);
   background(#39FF20);
-  
   banner();
 }
 
@@ -39,7 +38,12 @@ void draw() {
 }
 
 void keyPressed() {
-  
+  if (key == 's') {
+    theHouse.getHand().getCard(0).setReveal(true);
+  }
+  if (key == 'h') {
+    theHouse.getHand().getCard(0).setReveal(false);
+  }
 }
 
 void displayCards(Hand daHand, float x, float y) {
