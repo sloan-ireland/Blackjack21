@@ -7,7 +7,7 @@ PImage back;
 
 void setup() {
   back = loadImage("Cards/back.png");
-  back.resize(120, 174); 
+  back.resize(180, 261); 
   size(1000, 800);
   background(#39FF20);
   
@@ -34,18 +34,23 @@ void handSetup() {
   displayCards(thePlayer.getHand(),430, 500);
 }
 void draw() {
-  noLoop();
   handSetup();
 }
 
 void keyPressed() {
-  
+  if (key == 's') {
+    theHouse.getHand().getCard(0).setReveal(true);
+  }
+  if (key == 'h') {
+    //theHouse.getHand().getCard(0).setReveal(false);
+    thePlayer.getHand().Hit(masterDeck);
+  }
 }
 
 void displayCards(Hand daHand, float x, float y) {
   for (int i = 0, j = 0; i < daHand.getHandLength(); i++, j += 50) {
     PImage card = loadImage("Cards/" + daHand.getCard(i).getImageString());
-    card.resize(120, 174);
+    card.resize(180, 261);
     if (daHand.getCard(i).isRevealed()) {
       image(card, x +j, y);
     }
@@ -59,15 +64,20 @@ void checkBlackjack() {
   boolean playerBJ = thePlayer.getHand().hasBlackjack();
   boolean houseBJ = theHouse.getHand().hasBlackjack();
   if (playerBJ && !houseBJ) {
-    thePlayer.addWallet((int)(thePlayer.getbet() * 1.5));
+    //thePlayer.addWallet((int)(thePlayer.getbet() * 1.5));
+    endRound(1);
+  } else if (!playerBJ && houseBJ) {
+    endRound(2);
   } else if (playerBJ && houseBJ) {
-    thePlayer.addWallet(thePlayer.getbet());
+    //thePlayer.addWallet(thePlayer.getbet());
+    endRound(3);
   } else {
     play();
   }
 }
 
 void play() {
+  
 }
 
 void endRound(int mode) {
