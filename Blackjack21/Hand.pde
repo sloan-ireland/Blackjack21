@@ -30,16 +30,8 @@ public class Hand {
   }
   
   public boolean hasBlackjack() {
-    boolean hasAce = false;
-    boolean has10 = false;
-    for (int i = 0; i < currentHand.size(); i++) {
-      if (currentHand.get(i).getValue() == 11) {
-        hasAce = true;
-      }
-      if (currentHand.get(i).getValue() == 10) {
-        has10 = true;
-      }
-    }
+    boolean hasAce = currentHand.get(0).getValue() == 11 || currentHand.get(1).getValue() == 11;
+    boolean has10 = currentHand.get(0).getValue() == 10 || currentHand.get(1).getValue() == 10;
     return hasAce && has10;
   }
   
