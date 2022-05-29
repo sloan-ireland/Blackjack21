@@ -28,14 +28,23 @@ void banner() {
 
 void handSetup() {
   textAlign(LEFT);
-  text("The Dealer", 450, 120);
   displayCards(theHouse.getHand(), 430, 130);
   text("Player", 470, 700);
   displayCards(thePlayer.getHand(), 430, 500);
 }
 void draw() {
   handSetup();
-  text("Sum: " + thePlayer.getHand().getSum(), 800, 800);
+  fill(255);
+  rect(430,100, 250,25);
+  rect(460,765, 235, 30);
+  fill(0);
+  if (playerTurn) {
+   text("The Dealer -- Sum: ? ? ? " , 440, 120);
+  }
+  if (!playerTurn) {
+   text("The Dealer -- Sum: " + theHouse.getHand().getSum(), 440, 120);
+  }
+  text("The Player -- Sum: " + thePlayer.getHand().getSum(), 470, 787);
 }
 
 
@@ -108,13 +117,13 @@ void endRound(int mode, boolean wasBlackjack) {
     else {
       thePlayer.addWallet(thePlayer.getbet() * 2);
     }
-    text("Lucky Ducky, I'll give you a little of my vast part of my fortune", 500, 500);
+    text("Lucky Ducky, I'll give you a little of my vast part of my fortune", 300, 450);
   } else if (mode == 2) {
     theHouse.getHand().getCard(0).setReveal(true);
-    text("You Lose, I'll be taking your money. Please come again", 500, 500);
+    text("You Lose, I'll be taking your money. Please come again", 300, 450);
   } else if (mode == 3) {
     thePlayer.addWallet(thePlayer.getbet());
-    text("It seems you've matched me! You'll lose when you play in the future", 500, 500);
+    text("It seems you've matched me! You'll lose when you play in the future", 300, 450);
   }
   thePlayer.makeBet(0);
 }
