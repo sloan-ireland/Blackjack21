@@ -2,6 +2,7 @@ Deck masterDeck = new Deck();
 Dealer theHouse = new Dealer();
 Player thePlayer = new Player();
 boolean roundOver = false;
+boolean playerTurn = true;
 
 PImage back; 
 
@@ -38,12 +39,15 @@ void draw() {
 }
 
 void keyPressed() {
-  if (key == 's') {
-    theHouse.getHand().getCard(0).setReveal(true);
-  }
-  if (key == 'h') {
-    //theHouse.getHand().getCard(0).setReveal(false);
-    thePlayer.getHand().Hit(masterDeck);
+  if (playerTurn) { 
+    if (key == 's') {
+      playerTurn = false;
+      checkBlackjack();
+     
+    }
+    if (key == 'h') {
+      thePlayer.getHand().Hit(masterDeck);
+    }
   }
 }
 
@@ -64,15 +68,13 @@ void checkBlackjack() {
   boolean playerBJ = thePlayer.getHand().hasBlackjack();
   boolean houseBJ = theHouse.getHand().hasBlackjack();
   if (playerBJ && !houseBJ) {
-    //thePlayer.addWallet((int)(thePlayer.getbet() * 1.5));
-    endRound(1);
+    endRound(1, true);
   } else if (!playerBJ && houseBJ) {
-    endRound(2);
+      endRound(2, true);
   } else if (playerBJ && houseBJ) {
-    //thePlayer.addWallet(thePlayer.getbet());
-    endRound(3);
+      endRound(3, true);
   } else {
-    play();
+      play();
   }
 }
 
@@ -80,5 +82,22 @@ void play() {
   
 }
 
-void endRound(int mode) {
+void endRound(int mode, boolean wasBlackjack) {
+  if (mode == 1) {
+    if (wasBlackjack) {
+      thePlayer.addWallet((int)(thePlayer.getbet() * 1.5) + thePlayer.getbet());
+    }
+    else {
+      thePlayer.addWallet(thePlayer.getbet() * 2);
+    }
+    text("Lucky Ducky, I'll give a vast part of my fortune",500, 500);
+  }
+  else if (mode == 2) {
+    text("You Lose, I'll be taking your money. Please come again",500,500);
+  }
+  else if (mode == 3) {
+    thePlayer.addWallet(thePlayer.getbet());
+    text("Better luck next time. You'll lose when you play in the future" , 500, 500);
+  }
+  thePlayer.makeBet(0);
 }
