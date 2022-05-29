@@ -39,7 +39,7 @@ void draw() {
   handSetup();
   fill(255);
   rect(430,100, 250,25);
-  rect(430,765, 235, 30);
+  rect(430,765, 245, 30);
   rect(30,90,200,55);
   fill(0);
   if (playerTurn) {
@@ -48,15 +48,22 @@ void draw() {
   if (!playerTurn) {
    text("The Dealer -- Sum: " + theHouse.getHand().getSum(), 440, 120);
   }
-  text("The Player -- Sum: " + thePlayer.getHand().getSum(), 440, 787);
+  if (beforePlay) {
+    text("The Player -- Sum: ? ? ? ", 440, 787);
+  }
+  if (!beforePlay) {
+    text("The Player -- Sum: " + thePlayer.getHand().getSum(), 440, 787);
+  }
   text("Wallet: "  + thePlayer.getWallet(), 37, 112);
   text("Bet: " + thePlayer.getbet(), 37,135);
+  if (!beforePlay){
   checkBlackjack();
+  }
 }
 
 
 void keyPressed() {
-  if (playerTurn) { 
+  if (!beforePlay && playerTurn) { 
     if (key == 's') {
       playerTurn = false;
       play();
@@ -70,19 +77,30 @@ void keyPressed() {
     }
   }
   if (beforePlay) {
-    for (int i = 0; i < 10; i++) {
-      if (key == i) {
-        //player.
+      if (key == '1' || key == '2' || key == '3' || key == '4' || key == '5' || key == '6' || key == '7' || key == '8' || key == '9' || key == '0') {
+        if (thePlayer.getbet() == 0) {
+          thePlayer.makeBet(Character.getNumericValue(key));
+        }
+        else {
+          thePlayer.addWallet(thePlayer.getbet());
+          thePlayer.makeBet(thePlayer.getbet() * 10 + Character.getNumericValue(key));
+        }
       }
-    }
-  }
-  if (roundOver) {
+   }
+   if (beforePlay && keyCode == ENTER) {
+     beforePlay = false;
+     thePlayer.getHand().getCard(0).setReveal(true);
+     thePlayer.getHand().getCard(1).setReveal(true);
+   }
+ if (roundOver) {
     if (key == 'r') {
       noLoop();
       setup();
       theHouse = new Dealer();
-      thePlayer = new Player();
+      thePlayer.setHand(new Hand(0));
       loop();
+      roundOver = false;
+      beforePlay = true;
     }
   }
 }

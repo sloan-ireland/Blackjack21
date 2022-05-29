@@ -44,10 +44,8 @@ public class Player {
   public void setHand(Hand dahand) {
     currentHand = dahand;
   }
-  /**
-  Withdraw bet amount from wallet and changes bet to the bet value
-  IllegalArgumentException is thrown: bet is greater than the wallet
-  **/
+  
+  
   public void makeBet(int currentBet) {
     if (currentBet > wallet) {
       text("You poor person. \nMake a bet you can afford!", 37, 200);
