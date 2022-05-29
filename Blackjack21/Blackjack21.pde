@@ -3,6 +3,7 @@ Dealer theHouse = new Dealer();
 Player thePlayer = new Player();
 boolean roundOver = false;
 boolean playerTurn = true;
+boolean beforePlay = true;
 
 PImage back; 
 
@@ -36,7 +37,8 @@ void draw() {
   handSetup();
   fill(255);
   rect(430,100, 250,25);
-  rect(460,765, 235, 30);
+  rect(430,765, 235, 30);
+  rect(30,90,200,55);
   fill(0);
   if (playerTurn) {
    text("The Dealer -- Sum: ? ? ? " , 440, 120);
@@ -44,7 +46,10 @@ void draw() {
   if (!playerTurn) {
    text("The Dealer -- Sum: " + theHouse.getHand().getSum(), 440, 120);
   }
-  text("The Player -- Sum: " + thePlayer.getHand().getSum(), 470, 787);
+  text("The Player -- Sum: " + thePlayer.getHand().getSum(), 440, 787);
+  text("Wallet: "  + thePlayer.getWallet(), 37, 112);
+  text("Bet: " + thePlayer.getbet(), 37,135);
+  checkBlackjack();
 }
 
 
@@ -57,8 +62,15 @@ void keyPressed() {
     if (key == 'h') {
       thePlayer.getHand().Hit(masterDeck);
       if (thePlayer.getHand().getSum() > 21) {
-        endRound(2, false);
         playerTurn = false;
+        endRound(2, false);
+      }
+    }
+  }
+  if (beforePlay) {
+    for (int i = 0; i < 10; i++) {
+      if (key == i) {
+        //player.
       }
     }
   }
@@ -78,20 +90,22 @@ void displayCards(Hand daHand, float x, float y) {
 }
 
 void checkBlackjack() {
-  playerTurn = false;
   boolean playerBJ = thePlayer.getHand().hasBlackjack();
   boolean houseBJ = theHouse.getHand().hasBlackjack();
   if (playerBJ && !houseBJ) {
+    playerTurn = false;
     endRound(1, true);
   } else if (!playerBJ && houseBJ) {
+    playerTurn = false;
     endRound(2, true);
   } else if (playerBJ && houseBJ) {
+    playerTurn = false;
     endRound(3, true);
   } 
 }
 
 void play() {
-  theHouse.getHand().getCard(0).setReveal(true);
+  //theHouse.getHand().getCard(0).setReveal(true);
   while (theHouse.getHand().getSum() < 17) {
     theHouse.getHand().Hit(masterDeck);
   }
@@ -110,6 +124,7 @@ void play() {
 }
 
 void endRound(int mode, boolean wasBlackjack) {
+  theHouse.getHand().getCard(0).setReveal(true);
   if (mode == 1) {
     if (wasBlackjack) {
       thePlayer.addWallet((int)(thePlayer.getbet() * 1.5) + thePlayer.getbet());
@@ -117,7 +132,7 @@ void endRound(int mode, boolean wasBlackjack) {
     else {
       thePlayer.addWallet(thePlayer.getbet() * 2);
     }
-    text("Lucky Ducky, I'll give you a little of my vast part of my fortune", 300, 450);
+    text("Lucky Ducky, I'll give you a little part of my vast fortune", 300, 450);
   } else if (mode == 2) {
     theHouse.getHand().getCard(0).setReveal(true);
     text("You Lose, I'll be taking your money. Please come again", 300, 450);
