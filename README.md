@@ -111,5 +111,7 @@ Sloan --> Added banner and cardset up methods. played around with display functi
 
 Nurdaulet --> Experimented with drawing cards and displaying them when hitting and standing. Added a small portion to test that hitting and standing changes modes and switches to the other mode.
 
+Sloan --> Wrote most of the game logic in the main file including play() and endRound(). redid parts of checkBlackjack. Started getting actual display functionality with keyPressed(). Experimented with different card drawings. Discovered error with counting Aces that needs to be fixed.  
+
 ###### Compile/Run Instructions:
 To come
