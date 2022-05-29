@@ -43,14 +43,11 @@ void keyPressed() {
       theHouse.getHand().getCard(0).setReveal(true);
       playerTurn = false;
       checkBlackjack();
-      delay(500);
       theHouse.getHand().Hit(masterDeck);
-      checkBlackjack();
       playerTurn = true;
     }
     if (key == 'h') {
       thePlayer.getHand().Hit(masterDeck);
-      checkBlackjack();
     }
   }
 }
