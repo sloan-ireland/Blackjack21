@@ -8,6 +8,7 @@ boolean beforePlay = true;
 PImage back; 
 
 void setup() {
+  playerTurn = true;
   back = loadImage("Cards/back.png");
   back.resize(180, 261); 
   size(1000, 800);
@@ -34,6 +35,7 @@ void handSetup() {
   displayCards(thePlayer.getHand(), 430, 500);
 }
 void draw() {
+  textSize(20);
   handSetup();
   fill(255);
   rect(430,100, 250,25);
@@ -72,6 +74,15 @@ void keyPressed() {
       if (key == i) {
         //player.
       }
+    }
+  }
+  if (roundOver) {
+    if (key == 'r') {
+      noLoop();
+      setup();
+      theHouse = new Dealer();
+      thePlayer = new Player();
+      loop();
     }
   }
 }
@@ -124,7 +135,8 @@ void play() {
 }
 
 void endRound(int mode, boolean wasBlackjack) {
-  theHouse.getHand().getCard(0).setReveal(true);
+  textSize(20);
+  theHouse.getHand().getCard(0).setReveal(true); 
   if (mode == 1) {
     if (wasBlackjack) {
       thePlayer.addWallet((int)(thePlayer.getbet() * 1.5) + thePlayer.getbet());
@@ -141,4 +153,8 @@ void endRound(int mode, boolean wasBlackjack) {
     text("It seems you've matched me! You'll lose when you play in the future", 300, 450);
   }
   thePlayer.makeBet(0);
+  textSize(40);
+  delay(500);
+  text("Want to play again? \nPress R", 20, 700);
+  roundOver = true;
 }
