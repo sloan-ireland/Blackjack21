@@ -3,10 +3,12 @@ Dealer theHouse = new Dealer();
 Player thePlayer = new Player();
 boolean roundOver = false;
 boolean playerTurn = true;
+boolean beforePlay = true;
 
 PImage back; 
 
 void setup() {
+  playerTurn = true;
   back = loadImage("Cards/back.png");
   back.resize(180, 261); 
   size(1000, 800);
@@ -28,19 +30,40 @@ void banner() {
 
 void handSetup() {
   textAlign(LEFT);
-  text("The Dealer", 450, 120);
   displayCards(theHouse.getHand(), 430, 130);
   text("Player", 470, 700);
   displayCards(thePlayer.getHand(), 430, 500);
 }
 void draw() {
+  textSize(20);
   handSetup();
-  text("Sum: " + thePlayer.getHand().getSum(), 800, 800);
+  fill(255);
+  rect(430,100, 250,25);
+  rect(430,765, 245, 30);
+  rect(30,90,200,55);
+  fill(0);
+  if (playerTurn) {
+   text("The Dealer -- Sum: ? ? ? " , 440, 120);
+  }
+  if (!playerTurn) {
+   text("The Dealer -- Sum: " + theHouse.getHand().getSum(), 440, 120);
+  }
+  if (beforePlay) {
+    text("The Player -- Sum: ? ? ? ", 440, 787);
+  }
+  if (!beforePlay) {
+    text("The Player -- Sum: " + thePlayer.getHand().getSum(), 440, 787);
+  }
+  text("Wallet: "  + thePlayer.getWallet(), 37, 112);
+  text("Bet: " + thePlayer.getbet(), 37,135);
+  if (!beforePlay){
+  checkBlackjack();
+  }
 }
 
 
 void keyPressed() {
-  if (playerTurn) { 
+  if (!beforePlay && playerTurn) { 
     if (key == 's') {
       playerTurn = false;
       play();
@@ -48,9 +71,36 @@ void keyPressed() {
     if (key == 'h') {
       thePlayer.getHand().Hit(masterDeck);
       if (thePlayer.getHand().getSum() > 21) {
-        endRound(2, false);
         playerTurn = false;
+        endRound(2, false);
       }
+    }
+  }
+  if (beforePlay) {
+      if (key == '1' || key == '2' || key == '3' || key == '4' || key == '5' || key == '6' || key == '7' || key == '8' || key == '9' || key == '0') {
+        if (thePlayer.getbet() == 0) {
+          thePlayer.makeBet(Character.getNumericValue(key));
+        }
+        else {
+          thePlayer.addWallet(thePlayer.getbet());
+          thePlayer.makeBet(thePlayer.getbet() * 10 + Character.getNumericValue(key));
+        }
+      }
+   }
+   if (beforePlay && keyCode == ENTER) {
+     beforePlay = false;
+     thePlayer.getHand().getCard(0).setReveal(true);
+     thePlayer.getHand().getCard(1).setReveal(true);
+   }
+ if (roundOver) {
+    if (key == 'r') {
+      noLoop();
+      setup();
+      theHouse = new Dealer();
+      thePlayer.setHand(new Hand(0));
+      loop();
+      roundOver = false;
+      beforePlay = true;
     }
   }
 }
@@ -69,20 +119,22 @@ void displayCards(Hand daHand, float x, float y) {
 }
 
 void checkBlackjack() {
-  playerTurn = false;
   boolean playerBJ = thePlayer.getHand().hasBlackjack();
   boolean houseBJ = theHouse.getHand().hasBlackjack();
   if (playerBJ && !houseBJ) {
+    playerTurn = false;
     endRound(1, true);
   } else if (!playerBJ && houseBJ) {
+    playerTurn = false;
     endRound(2, true);
   } else if (playerBJ && houseBJ) {
+    playerTurn = false;
     endRound(3, true);
   } 
 }
 
 void play() {
-  theHouse.getHand().getCard(0).setReveal(true);
+  //theHouse.getHand().getCard(0).setReveal(true);
   while (theHouse.getHand().getSum() < 17) {
     theHouse.getHand().Hit(masterDeck);
   }
@@ -101,6 +153,8 @@ void play() {
 }
 
 void endRound(int mode, boolean wasBlackjack) {
+  textSize(20);
+  theHouse.getHand().getCard(0).setReveal(true); 
   if (mode == 1) {
     if (wasBlackjack) {
       thePlayer.addWallet((int)(thePlayer.getbet() * 1.5) + thePlayer.getbet());
@@ -108,13 +162,17 @@ void endRound(int mode, boolean wasBlackjack) {
     else {
       thePlayer.addWallet(thePlayer.getbet() * 2);
     }
-    text("Lucky Ducky, I'll give you a little of my vast part of my fortune", 500, 500);
+    text("Lucky Ducky, I'll give you a little part of my vast fortune", 300, 450);
   } else if (mode == 2) {
     theHouse.getHand().getCard(0).setReveal(true);
-    text("You Lose, I'll be taking your money. Please come again", 500, 500);
+    text("You Lose, I'll be taking your money. Please come again", 300, 450);
   } else if (mode == 3) {
     thePlayer.addWallet(thePlayer.getbet());
-    text("It seems you've matched me! You'll lose when you play in the future", 500, 500);
+    text("It seems you've matched me! You'll lose when you play in the future", 300, 450);
   }
   thePlayer.makeBet(0);
+  textSize(40);
+  delay(500);
+  text("Want to play again? \nPress R", 20, 700);
+  roundOver = true;
 }
