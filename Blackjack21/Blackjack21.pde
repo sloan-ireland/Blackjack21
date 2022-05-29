@@ -38,16 +38,11 @@ void draw() {
   text("Sum: " + thePlayer.getHand().getSum(), 800, 800);
 }
 
+
 void keyPressed() {
   if (playerTurn) { 
     if (key == 's') {
       playerTurn = false;
-      checkBlackjack();
-      theHouse.getHand().Hit(masterDeck);
-      playerTurn = true;
-    }
-    if (key == 'h') {
-      thePlayer.getHand().Hit(masterDeck);
       play();
     }
     if (key == 'h') {
@@ -59,7 +54,8 @@ void keyPressed() {
     }
   }
 }
-
+  
+  
 void displayCards(Hand daHand, float x, float y) {
   for (int i = 0, j = 0; i < daHand.getHandLength(); i++, j += 50) {
     PImage card = loadImage("Cards/" + daHand.getCard(i).getImageString());
@@ -118,7 +114,7 @@ void endRound(int mode, boolean wasBlackjack) {
     text("You Lose, I'll be taking your money. Please come again", 500, 500);
   } else if (mode == 3) {
     thePlayer.addWallet(thePlayer.getbet());
-    text("Better luck next time. You'll lose when you play in the future", 500, 500);
+    text("It seems you've matched me! You'll lose when you play in the future", 500, 500);
   }
   thePlayer.makeBet(0);
 }
