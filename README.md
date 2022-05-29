@@ -99,7 +99,17 @@ Sloan --> Continued working on main Blackjack21 file. spent time playing around 
 
 Nurdaulet --> Tested PImage assigning and loading inside setup() when drawing a card from deck.
 
+
 =-=-=- 5/27 =-=-=-
+
+
 Sloan --> Added banner and cardset up methods. played around with display functions for showing game functionality.
+
+
+-=-=-= 5/28 =-=-=- (SPECIAL DATE: Worked on one branch while the other experimented with functionalities, but didn't commit: Used screen sharing)
+
+
+Nurdaulet --> Experimented with drawing cards and displaying them when hitting and standing. Added a small portion to test that hitting and standing changes modes and switches to the other mode.
+
 ###### Compile/Run Instructions:
 To come
