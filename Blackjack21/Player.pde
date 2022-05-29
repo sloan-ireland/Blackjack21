@@ -4,7 +4,7 @@ public class Player {
   private int wallet;
   
   public Player() {
-    currentHand = new Hand(2);
+    currentHand = new Hand(0);
     bet = 0;
     wallet = 500;
   }
@@ -41,15 +41,25 @@ public class Player {
     return currentHand;
   }
   
+  public void setHand(Hand dahand) {
+    currentHand = dahand;
+  }
   /**
   Withdraw bet amount from wallet and changes bet to the bet value
   IllegalArgumentException is thrown: bet is greater than the wallet
   **/
   public void makeBet(int currentBet) {
     if (currentBet > wallet) {
-      throw new IllegalArgumentException("You poor person. Make a bet you can afford!");
+      text("You poor person. \nMake a bet you can afford!", 37, 200);
     }
+    else if (wallet == 0) {
+      wallet = 500;
+      text("Here is more money you \nincompotent person", 37, 200);
+      bet = 0;
+    }
+    else {
     wallet = wallet - currentBet;
     bet = currentBet;
+    }
   }
 }  
