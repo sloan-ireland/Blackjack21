@@ -82,6 +82,19 @@ void checkBlackjack() {
 }
 
 void play() {
+  theHouse.getHand().getCard(0).setReveal(true);
+  while (theHouse.getHand().getSum() < 16) {
+    theHouse.getHand().Hit(masterDeck);
+  }
+  if (theHouse.getHand().getSum() > 21) {
+    endRound(1, false);
+  }
+  else if (theHouse.getHand().getSum() > thePlayer.getHand().getSum()) {
+    endRound(2, false);
+  }
+  else if (theHouse.getHand().getSum() == thePlayer.getHand().getSum()) {
+    endRound(3, false);
+  }
 }
 
 void endRound(int mode, boolean wasBlackjack) {
