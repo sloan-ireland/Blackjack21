@@ -11,28 +11,27 @@ void setup() {
   back.resize(180, 261); 
   size(1000, 800);
   background(#39FF20);
-  
   banner();
 }
 
 void banner() {
   String title = "The Game of Blackjack";
   fill(255);
-  rect(250,5,500,75);
+  rect(250, 5, 500, 75);
   fill(0);
   textSize(40);
   textAlign(CENTER);
   text(title, 500, 45);
   textSize(20);
-  text("The House Always Wins! Play at your own risk :-)", 500,70);
+  text("The House Always Wins! Play at your own risk :-)", 500, 70);
 }
 
 void handSetup() {
   textAlign(LEFT);
   text("The Dealer", 450, 120);
   displayCards(theHouse.getHand(), 430, 130);
-  text("Player", 470,700);
-  displayCards(thePlayer.getHand(),430, 500);
+  text("Player", 470, 700);
+  displayCards(thePlayer.getHand(), 430, 500);
 }
 void draw() {
   handSetup();
@@ -41,12 +40,17 @@ void draw() {
 void keyPressed() {
   if (playerTurn) { 
     if (key == 's') {
+      theHouse.getHand().getCard(0).setReveal(true);
       playerTurn = false;
       checkBlackjack();
-     
+      delay(500);
+      theHouse.getHand().Hit(masterDeck);
+      checkBlackjack();
+      playerTurn = true;
     }
     if (key == 'h') {
       thePlayer.getHand().Hit(masterDeck);
+      checkBlackjack();
     }
   }
 }
@@ -57,9 +61,8 @@ void displayCards(Hand daHand, float x, float y) {
     card.resize(180, 261);
     if (daHand.getCard(i).isRevealed()) {
       image(card, x +j, y);
-    }
-    else {
-      image(back,x +j ,y);
+    } else {
+      image(back, x +j, y);
     }
   }
 }
@@ -70,34 +73,30 @@ void checkBlackjack() {
   if (playerBJ && !houseBJ) {
     endRound(1, true);
   } else if (!playerBJ && houseBJ) {
-      endRound(2, true);
+    endRound(2, true);
   } else if (playerBJ && houseBJ) {
-      endRound(3, true);
+    endRound(3, true);
   } else {
-      play();
+    play();
   }
 }
 
 void play() {
-  
 }
 
 void endRound(int mode, boolean wasBlackjack) {
   if (mode == 1) {
     if (wasBlackjack) {
       thePlayer.addWallet((int)(thePlayer.getbet() * 1.5) + thePlayer.getbet());
-    }
-    else {
+    } else {
       thePlayer.addWallet(thePlayer.getbet() * 2);
     }
-    text("Lucky Ducky, I'll give a vast part of my fortune",500, 500);
-  }
-  else if (mode == 2) {
-    text("You Lose, I'll be taking your money. Please come again",500,500);
-  }
-  else if (mode == 3) {
+    text("Lucky Ducky, I'll give a vast part of my fortune", 500, 500);
+  } else if (mode == 2) {
+    text("You Lose, I'll be taking your money. Please come again", 500, 500);
+  } else if (mode == 3) {
     thePlayer.addWallet(thePlayer.getbet());
-    text("Better luck next time. You'll lose when you play in the future" , 500, 500);
+    text("Better luck next time. You'll lose when you play in the future", 500, 500);
   }
   thePlayer.makeBet(0);
 }
