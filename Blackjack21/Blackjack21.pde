@@ -35,12 +35,12 @@ void handSetup() {
 }
 void draw() {
   handSetup();
+  text("Sum: " + thePlayer.getHand().getSum(), 800, 800);
 }
 
 void keyPressed() {
   if (playerTurn) { 
     if (key == 's') {
-      theHouse.getHand().getCard(0).setReveal(true);
       playerTurn = false;
       checkBlackjack();
       theHouse.getHand().Hit(masterDeck);
@@ -48,6 +48,14 @@ void keyPressed() {
     }
     if (key == 'h') {
       thePlayer.getHand().Hit(masterDeck);
+      play();
+    }
+    if (key == 'h') {
+      thePlayer.getHand().Hit(masterDeck);
+      if (thePlayer.getHand().getSum() > 21) {
+        endRound(2, false);
+        playerTurn = false;
+      }
     }
   }
 }
@@ -65,6 +73,7 @@ void displayCards(Hand daHand, float x, float y) {
 }
 
 void checkBlackjack() {
+  playerTurn = false;
   boolean playerBJ = thePlayer.getHand().hasBlackjack();
   boolean houseBJ = theHouse.getHand().hasBlackjack();
   if (playerBJ && !houseBJ) {
@@ -73,23 +82,39 @@ void checkBlackjack() {
     endRound(2, true);
   } else if (playerBJ && houseBJ) {
     endRound(3, true);
-  } else {
-    play();
-  }
+  } 
 }
 
 void play() {
+  theHouse.getHand().getCard(0).setReveal(true);
+  while (theHouse.getHand().getSum() < 17) {
+    theHouse.getHand().Hit(masterDeck);
+  }
+  if (theHouse.getHand().getSum() > 21) {
+    endRound(1, false);
+  }
+  else if (theHouse.getHand().getSum() > thePlayer.getHand().getSum()) {
+    endRound(2, false);
+  }
+  else if (theHouse.getHand().getSum() < thePlayer.getHand().getSum()) {
+    endRound(1, false);
+  }
+  else if (theHouse.getHand().getSum() == thePlayer.getHand().getSum()) {
+    endRound(3, false);
+  }
 }
 
 void endRound(int mode, boolean wasBlackjack) {
   if (mode == 1) {
     if (wasBlackjack) {
       thePlayer.addWallet((int)(thePlayer.getbet() * 1.5) + thePlayer.getbet());
-    } else {
+    } 
+    else {
       thePlayer.addWallet(thePlayer.getbet() * 2);
     }
-    text("Lucky Ducky, I'll give a vast part of my fortune", 500, 500);
+    text("Lucky Ducky, I'll give you a little of my vast part of my fortune", 500, 500);
   } else if (mode == 2) {
+    theHouse.getHand().getCard(0).setReveal(true);
     text("You Lose, I'll be taking your money. Please come again", 500, 500);
   } else if (mode == 3) {
     thePlayer.addWallet(thePlayer.getbet());
