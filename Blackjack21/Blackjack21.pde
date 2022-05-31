@@ -88,9 +88,25 @@ void keyPressed() {
       }
    }
    if (beforePlay && keyCode == ENTER) {
+     if (thePlayer.getbet() == 0) {
+       fill(255);
+       rect(32,180, 220,50);
+       fill(0);
+       text("Put some money down", 37, 200);
+     }
+     else if (thePlayer.getbet() % 25 != 0) {
+       thePlayer.addWallet(thePlayer.getbet());
+       fill(255);
+       rect(32,180, 220,50);
+       fill(0);
+        text("You can only bet\nin intervals of $25",37,200);
+     }
+     else {
      beforePlay = false;
      thePlayer.getHand().getCard(0).setReveal(true);
      thePlayer.getHand().getCard(1).setReveal(true);
+     theHouse.getHand().getCard(1).setReveal(true);
+     }
    }
  if (roundOver) {
     if (key == 'r') {
@@ -134,7 +150,7 @@ void checkBlackjack() {
 }
 
 void play() {
-  //theHouse.getHand().getCard(0).setReveal(true);
+  theHouse.getHand().getCard(0).setReveal(true);
   while (theHouse.getHand().getSum() < 17) {
     theHouse.getHand().Hit(masterDeck);
   }
