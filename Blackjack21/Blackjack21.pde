@@ -6,7 +6,6 @@ boolean playerTurn = true;
 boolean beforePlay = true;
 boolean troll = false;
 PImage back; 
-boolean overButton = false;
 
 void setup() {
   playerTurn = true;
@@ -15,6 +14,14 @@ void setup() {
   size(1000, 800);
   background(#39FF20);
   banner();
+  
+  fill(255);
+  rect(32, 350, 265, 300);
+  fill(0);
+  text("CONTROLS", 160, 380);
+  text("Start - ENTER", 120, 450);
+  text("Hit - 'H'", 93, 500);
+  text("Stand - 'S'", 105, 550);
 }
 
 void banner() {
@@ -63,15 +70,6 @@ void draw() {
     }
   }
   if (troll) {
-    if (overButton) {
-      fill(255);
-    } else {
-      noFill();
-    }
-    rect(105, 60, 75, 75);
-    line(135, 105, 155, 85);
-    line(140, 85, 155, 85);
-    line(155, 85, 155, 100);
   }
 }
 
@@ -103,14 +101,14 @@ void keyPressed() {
   if (beforePlay && keyCode == ENTER) {
     if (thePlayer.getbet() == 0) {
       fill(255);
-      rect(32, 180, 225, 55);
+      rect(32, 180, 265, 55);
     
       fill(0);
       text("Put some money down", 37, 200);
     } else if (thePlayer.getbet() % 25 != 0) {
       thePlayer.addWallet(thePlayer.getbet());
       fill(255);
-      rect(32, 180, 225, 55);
+      rect(32, 180, 265, 55);
       fill(0);
       text("You can only bet\nin intervals of $25", 37, 200);
       thePlayer.makeBet(0);
@@ -187,13 +185,13 @@ void endRound(int mode, boolean wasBlackjack) {
     } else {
       thePlayer.addWallet(thePlayer.getbet() * 2);
     }
-    text("Lucky Ducky, I'll give you a little part of my vast fortune", 300, 450);
+    text("Lucky Ducky, I'll give you a little part of my vast fortune", 310, 450);
   } else if (mode == 2) {
     theHouse.getHand().getCard(0).setReveal(true);
-    text("You Lose, I'll be taking your money. Please come again", 300, 450);
+    text("You Lose, I'll be taking your money. Please come again", 310, 450);
   } else if (mode == 3) {
     thePlayer.addWallet(thePlayer.getbet());
-    text("It seems you've matched me! You'll lose when you play in the future", 300, 450);
+    text("It seems you've matched me! You'll lose when you play in the future", 310, 450);
   }
   thePlayer.makeBet(0);
   if (thePlayer.getWallet() != 0) {

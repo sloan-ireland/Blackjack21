@@ -50,7 +50,7 @@ public class Player {
     if (currentBet > wallet) {
       bet = 0;
       fill(255);
-      rect(32, 180, 260, 55);
+      rect(32, 180, 265, 55);
       fill(0);
       text("You poor person. \nMake a bet you can afford!", 37, 200);
     }
