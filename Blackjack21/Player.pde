@@ -48,12 +48,17 @@ public class Player {
   
   public void makeBet(int currentBet) {
     if (currentBet > wallet) {
+      bet = 0;
       text("You poor person. \nMake a bet you can afford!", 37, 200);
     }
     else if (wallet == 0) {
-      wallet = 500;
-      text("Here is more money you \nincompotent person", 37, 200);
-      bet = 0;
+      noLoop();
+      background(0);
+      clear();
+      fill(255);
+      textSize(70);
+      textAlign(CENTER);
+      text("You incompetent person. \nYou have no money. \nGo cry in a hole", width / 2,200);
     }
     else {
     wallet = wallet - currentBet;
