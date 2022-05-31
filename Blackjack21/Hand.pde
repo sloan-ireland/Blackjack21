@@ -26,6 +26,7 @@ public class Hand {
     sum = currentHand.get(0).getValue() + currentHand.get(1).getValue();
     if (sum == 22) {
       sum = 12;
+      currentHand.get(1).countedAs(1);
     }
   }
   
