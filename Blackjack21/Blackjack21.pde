@@ -90,16 +90,17 @@ void keyPressed() {
    if (beforePlay && keyCode == ENTER) {
      if (thePlayer.getbet() == 0) {
        fill(255);
-       rect(32,180, 220,50);
+       rect(32,180, 225,55);
        fill(0);
        text("Put some money down", 37, 200);
      }
      else if (thePlayer.getbet() % 25 != 0) {
        thePlayer.addWallet(thePlayer.getbet());
        fill(255);
-       rect(32,180, 220,50);
+       rect(32,180, 225,55);
        fill(0);
         text("You can only bet\nin intervals of $25",37,200);
+       thePlayer.makeBet(0);
      }
      else {
      beforePlay = false;
@@ -187,8 +188,10 @@ void endRound(int mode, boolean wasBlackjack) {
     text("It seems you've matched me! You'll lose when you play in the future", 300, 450);
   }
   thePlayer.makeBet(0);
+  if (thePlayer.getWallet() != 0) {
   textSize(40);
   delay(500);
   text("Want to play again? \nPress R", 20, 700);
   roundOver = true;
+  }
 }
