@@ -4,7 +4,6 @@ public class Card {
   private Boolean revealed;
   private boolean isAce;
   private int countedAs;
-  private PImage image;
   
   public Card(String suit1, String value1, boolean revealed1) {
     suit = suit1;
@@ -54,10 +53,6 @@ public class Card {
   
   public boolean isAce() {
     return isAce;
-  }
-  
-  public PImage getImage() {
-    return image;
   }
   
   public String getImageString() {
