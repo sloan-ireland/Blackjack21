@@ -104,6 +104,7 @@ void keyPressed() {
     if (thePlayer.getbet() == 0) {
       fill(255);
       rect(32, 180, 225, 55);
+    
       fill(0);
       text("Put some money down", 37, 200);
     } else if (thePlayer.getbet() % 25 != 0) {
