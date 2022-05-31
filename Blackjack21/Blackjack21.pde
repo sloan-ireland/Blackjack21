@@ -4,7 +4,7 @@ Player thePlayer = new Player();
 boolean roundOver = false;
 boolean playerTurn = true;
 boolean beforePlay = true;
-
+boolean troll = false;
 PImage back; 
 
 void setup() {
@@ -35,29 +35,34 @@ void handSetup() {
   displayCards(thePlayer.getHand(), 430, 500);
 }
 void draw() {
-  textSize(20);
-  handSetup();
-  fill(255);
-  rect(430,100, 250,25);
-  rect(430,765, 245, 30);
-  rect(30,90,200,55);
-  fill(0);
-  if (playerTurn) {
-   text("The Dealer -- Sum: ? ? ? " , 440, 120);
+  if (!troll) {
+    textSize(20);
+    handSetup();
+    fill(255);
+    rect(430, 100, 250, 25);
+    rect(430, 765, 245, 30);
+    rect(30, 90, 200, 55);
+    fill(0);
+    if (playerTurn) {
+      text("The Dealer -- Sum: ? ? ? ", 440, 120);
+    }
+    if (!playerTurn) {
+      text("The Dealer -- Sum: " + theHouse.getHand().getSum(), 440, 120);
+    }
+    if (beforePlay) {
+      text("The Player -- Sum: ? ? ? ", 440, 787);
+    }
+    if (!beforePlay) {
+      text("The Player -- Sum: " + thePlayer.getHand().getSum(), 440, 787);
+    }
+    text("Wallet: "  + thePlayer.getWallet(), 37, 112);
+    text("Bet: " + thePlayer.getbet(), 37, 135);
+    if (!beforePlay) {
+      checkBlackjack();
+    }
   }
-  if (!playerTurn) {
-   text("The Dealer -- Sum: " + theHouse.getHand().getSum(), 440, 120);
-  }
-  if (beforePlay) {
-    text("The Player -- Sum: ? ? ? ", 440, 787);
-  }
-  if (!beforePlay) {
-    text("The Player -- Sum: " + thePlayer.getHand().getSum(), 440, 787);
-  }
-  text("Wallet: "  + thePlayer.getWallet(), 37, 112);
-  text("Bet: " + thePlayer.getbet(), 37,135);
-  if (!beforePlay){
-  checkBlackjack();
+  if (troll) {
+    
   }
 }
 
@@ -77,39 +82,36 @@ void keyPressed() {
     }
   }
   if (beforePlay) {
-      if (key == '1' || key == '2' || key == '3' || key == '4' || key == '5' || key == '6' || key == '7' || key == '8' || key == '9' || key == '0') {
-        if (thePlayer.getbet() == 0) {
-          thePlayer.makeBet(Character.getNumericValue(key));
-        }
-        else {
-          thePlayer.addWallet(thePlayer.getbet());
-          thePlayer.makeBet(thePlayer.getbet() * 10 + Character.getNumericValue(key));
-        }
+    if (key == '1' || key == '2' || key == '3' || key == '4' || key == '5' || key == '6' || key == '7' || key == '8' || key == '9' || key == '0') {
+      if (thePlayer.getbet() == 0) {
+        thePlayer.makeBet(Character.getNumericValue(key));
+      } else {
+        thePlayer.addWallet(thePlayer.getbet());
+        thePlayer.makeBet(thePlayer.getbet() * 10 + Character.getNumericValue(key));
       }
-   }
-   if (beforePlay && keyCode == ENTER) {
-     if (thePlayer.getbet() == 0) {
-       fill(255);
-       rect(32,180, 225,55);
-       fill(0);
-       text("Put some money down", 37, 200);
-     }
-     else if (thePlayer.getbet() % 25 != 0) {
-       thePlayer.addWallet(thePlayer.getbet());
-       fill(255);
-       rect(32,180, 225,55);
-       fill(0);
-        text("You can only bet\nin intervals of $25",37,200);
-       thePlayer.makeBet(0);
-     }
-     else {
-     beforePlay = false;
-     thePlayer.getHand().getCard(0).setReveal(true);
-     thePlayer.getHand().getCard(1).setReveal(true);
-     theHouse.getHand().getCard(1).setReveal(true);
-     }
-   }
- if (roundOver) {
+    }
+  }
+  if (beforePlay && keyCode == ENTER) {
+    if (thePlayer.getbet() == 0) {
+      fill(255);
+      rect(32, 180, 225, 55);
+      fill(0);
+      text("Put some money down", 37, 200);
+    } else if (thePlayer.getbet() % 25 != 0) {
+      thePlayer.addWallet(thePlayer.getbet());
+      fill(255);
+      rect(32, 180, 225, 55);
+      fill(0);
+      text("You can only bet\nin intervals of $25", 37, 200);
+      thePlayer.makeBet(0);
+    } else {
+      beforePlay = false;
+      thePlayer.getHand().getCard(0).setReveal(true);
+      thePlayer.getHand().getCard(1).setReveal(true);
+      theHouse.getHand().getCard(1).setReveal(true);
+    }
+  }
+  if (roundOver) {
     if (key == 'r') {
       noLoop();
       setup();
@@ -121,8 +123,8 @@ void keyPressed() {
     }
   }
 }
-  
-  
+
+
 void displayCards(Hand daHand, float x, float y) {
   for (int i = 0, j = 0; i < daHand.getHandLength(); i++, j += 50) {
     PImage card = loadImage("Cards/" + daHand.getCard(i).getImageString());
@@ -147,7 +149,7 @@ void checkBlackjack() {
   } else if (playerBJ && houseBJ) {
     playerTurn = false;
     endRound(3, true);
-  } 
+  }
 }
 
 void play() {
@@ -157,14 +159,11 @@ void play() {
   }
   if (theHouse.getHand().getSum() > 21) {
     endRound(1, false);
-  }
-  else if (theHouse.getHand().getSum() > thePlayer.getHand().getSum()) {
+  } else if (theHouse.getHand().getSum() > thePlayer.getHand().getSum()) {
     endRound(2, false);
-  }
-  else if (theHouse.getHand().getSum() < thePlayer.getHand().getSum()) {
+  } else if (theHouse.getHand().getSum() < thePlayer.getHand().getSum()) {
     endRound(1, false);
-  }
-  else if (theHouse.getHand().getSum() == thePlayer.getHand().getSum()) {
+  } else if (theHouse.getHand().getSum() == thePlayer.getHand().getSum()) {
     endRound(3, false);
   }
 }
@@ -175,8 +174,7 @@ void endRound(int mode, boolean wasBlackjack) {
   if (mode == 1) {
     if (wasBlackjack) {
       thePlayer.addWallet((int)(thePlayer.getbet() * 1.5) + thePlayer.getbet());
-    } 
-    else {
+    } else {
       thePlayer.addWallet(thePlayer.getbet() * 2);
     }
     text("Lucky Ducky, I'll give you a little part of my vast fortune", 300, 450);
@@ -189,9 +187,9 @@ void endRound(int mode, boolean wasBlackjack) {
   }
   thePlayer.makeBet(0);
   if (thePlayer.getWallet() != 0) {
-  textSize(40);
-  delay(500);
-  text("Want to play again? \nPress R", 20, 700);
-  roundOver = true;
+    textSize(40);
+    delay(500);
+    text("Want to play again? \nPress R", 20, 700);
+    roundOver = true;
   }
 }
