@@ -6,6 +6,7 @@ boolean playerTurn = true;
 boolean beforePlay = true;
 boolean troll = false;
 PImage back; 
+boolean overButton = false;
 
 void setup() {
   playerTurn = true;
@@ -62,7 +63,15 @@ void draw() {
     }
   }
   if (troll) {
-    
+    if (overButton) {
+      fill(255);
+    } else {
+      noFill();
+    }
+    rect(105, 60, 75, 75);
+    line(135, 105, 155, 85);
+    line(140, 85, 155, 85);
+    line(155, 85, 155, 100);
   }
 }
 
