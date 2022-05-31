@@ -49,6 +49,9 @@ public class Player {
   public void makeBet(int currentBet) {
     if (currentBet > wallet) {
       bet = 0;
+      fill(255);
+      rect(32, 180, 265, 55);
+      fill(0);
       text("You poor person. \nMake a bet you can afford!", 37, 200);
     }
     else if (wallet == 0) {

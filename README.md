@@ -22,6 +22,21 @@ Face cards all count as 10 and all other cards represent their normal value. Ace
 
 Payout: If the player had a natural blackjack (21 was reached between the first two cards) and the dealer doesn't have a natural blackjack the player immediately gets paid 1.5x his original bet. On a normal hand if the player beats the dealer, they get paid 1x their original bet. If they lose the dealer takes the bet. If a push occurs, no money is given or taken.
 
+###### Compile/Run Instructions:
+1) After opening the processing file, hit the green RUN button on the top left corner.
+
+2) Make a bet using the numbers (top row of numbers on keyboard) within the wallet range.
+
+3) Click ENTER to start the game.
+
+4) Clicking "S" calls STAND.
+
+5) Clicking "H" calls HIT.
+
+6) When the round is over (given the player's wallet isn't empty), click "R" to restart the round.
+
+7) If all money is lost, a black screen will appear --> RE-OPEN the game.
+
 **Special Plays and Betting Cases**
 
 Disclaimer: Anything listed here below is not supported by the our current blackjack version
@@ -113,5 +128,8 @@ Nurdaulet --> Experimented with drawing cards and displaying them when hitting a
 
 Sloan --> Wrote most of the game logic in the main file including play() and endRound(). redid parts of checkBlackjack. Started getting actual display functionality with keyPressed(). Experimented with different card drawings. Discovered error with counting Aces that needs to be fixed.  
 
-###### Compile/Run Instructions:
-To come
+
+-=-=-= 5/30 =-=-=- (SPECIAL DATE: Worked on one branch while the other experimented with functionalities, but didn't commit: Used screen sharing)
+
+
+Nurdaulet --> Fixed the betting issue where going over displayed negative numbers and infinite wallet. Helped Sloan run through code and find minor bugs and errors to fix.
