@@ -79,132 +79,133 @@ void draw() {
     if (troll) {
     }
   }
+}
 
 
-  void keyPressed() {
-    if (!beforePlay && playerTurn) { 
-      if (key == 's') {
+void keyPressed() {
+  if (!beforePlay && playerTurn) { 
+    if (key == 's') {
+      playerTurn = false;
+      play();
+    }
+    if (key == 'h') {
+      thePlayer.getHand().Hit(masterDeck);
+      if (thePlayer.getHand().getSum() > 21) {
         playerTurn = false;
-        play();
-      }
-      if (key == 'h') {
-        thePlayer.getHand().Hit(masterDeck);
-        if (thePlayer.getHand().getSum() > 21) {
-          playerTurn = false;
-          endRound(2, false);
-        }
+        endRound(2, false);
       }
     }
-    if (beforePlay) {
-      if (key == '1' || key == '2' || key == '3' || key == '4' || key == '5' || key == '6' || key == '7' || key == '8' || key == '9' || key == '0') {
-        if (thePlayer.getbet() == 0) {
-          thePlayer.makeBet(Character.getNumericValue(key));
-        } else {
-          thePlayer.addWallet(thePlayer.getbet());
-          thePlayer.makeBet(thePlayer.getbet() * 10 + Character.getNumericValue(key));
-        }
-      }
-    }
-    if (beforePlay && keyCode == ENTER) {
+  }
+  if (beforePlay) {
+    if (key == '1' || key == '2' || key == '3' || key == '4' || key == '5' || key == '6' || key == '7' || key == '8' || key == '9' || key == '0') {
       if (thePlayer.getbet() == 0) {
-        fill(255);
-        rect(32, 180, 265, 55);
-
-        fill(0);
-        text("Put some money down", 37, 200);
-      } else if (thePlayer.getbet() % 25 != 0) {
+        thePlayer.makeBet(Character.getNumericValue(key));
+      } else {
         thePlayer.addWallet(thePlayer.getbet());
-        fill(255);
-        rect(32, 180, 265, 55);
-        fill(0);
-        text("You can only bet\nin intervals of $25", 37, 200);
-        thePlayer.makeBet(0);
-      } else {
-        beforePlay = false;
-        thePlayer.getHand().getCard(0).setReveal(true);
-        thePlayer.getHand().getCard(1).setReveal(true);
-        theHouse.getHand().getCard(1).setReveal(true);
-      }
-    }
-    if (roundOver) {
-      if (key == 'r') {
-        noLoop();
-        setup();
-        theHouse = new Dealer();
-        thePlayer.setHand(new Hand(0));
-        loop();
-        roundOver = false;
-        beforePlay = true;
+        thePlayer.makeBet(thePlayer.getbet() * 10 + Character.getNumericValue(key));
       }
     }
   }
+  if (beforePlay && keyCode == ENTER) {
+    if (thePlayer.getbet() == 0) {
+      fill(255);
+      rect(32, 180, 265, 55);
 
-
-  void displayCards(Hand daHand, float x, float y) {
-    for (int i = 0, j = 0; i < daHand.getHandLength(); i++, j += 50) {
-      PImage card = loadImage("Cards/" + daHand.getCard(i).getImageString());
-      card.resize(180, 261);
-      if (daHand.getCard(i).isRevealed()) {
-        image(card, x +j, y);
-      } else {
-        image(back, x +j, y);
-      }
-    }
-  }
-
-  void checkBlackjack() {
-    boolean playerBJ = thePlayer.getHand().hasBlackjack();
-    boolean houseBJ = theHouse.getHand().hasBlackjack();
-    if (playerBJ && !houseBJ) {
-      playerTurn = false;
-      endRound(1, true);
-    } else if (!playerBJ && houseBJ) {
-      playerTurn = false;
-      endRound(2, true);
-    } else if (playerBJ && houseBJ) {
-      playerTurn = false;
-      endRound(3, true);
-    }
-  }
-
-  void play() {
-    theHouse.getHand().getCard(0).setReveal(true);
-    while (theHouse.getHand().getSum() < 17) {
-      theHouse.getHand().Hit(masterDeck);
-    }
-    if (theHouse.getHand().getSum() > 21) {
-      endRound(1, false);
-    } else if (theHouse.getHand().getSum() > thePlayer.getHand().getSum()) {
-      endRound(2, false);
-    } else if (theHouse.getHand().getSum() < thePlayer.getHand().getSum()) {
-      endRound(1, false);
-    } else if (theHouse.getHand().getSum() == thePlayer.getHand().getSum()) {
-      endRound(3, false);
-    }
-  }
-
-  void endRound(int mode, boolean wasBlackjack) {
-    textSize(20);
-    theHouse.getHand().getCard(0).setReveal(true); 
-    if (mode == 1) {
-      if (wasBlackjack) {
-        thePlayer.addWallet((int)(thePlayer.getbet() * 1.5) + thePlayer.getbet());
-      } else {
-        thePlayer.addWallet(thePlayer.getbet() * 2);
-      }
-      text("Lucky Ducky, I'll give you a little part of my vast fortune", 310, 450);
-    } else if (mode == 2) {
-      theHouse.getHand().getCard(0).setReveal(true);
-      text("You Lose, I'll be taking your money. Please come again", 310, 450);
-    } else if (mode == 3) {
+      fill(0);
+      text("Put some money down", 37, 200);
+    } else if (thePlayer.getbet() % 25 != 0) {
       thePlayer.addWallet(thePlayer.getbet());
-      text("It seems you've matched me! You'll lose when you play in the future", 310, 450);
-    }
-    thePlayer.makeBet(0);
-    if (thePlayer.getWallet() != 0) {
-      textSize(40);
-      delay(500);
-      text("Want to play again? \nPress R", 20, 700);
-      roundOver = true;
+      fill(255);
+      rect(32, 180, 265, 55);
+      fill(0);
+      text("You can only bet\nin intervals of $25", 37, 200);
+      thePlayer.makeBet(0);
+    } else {
+      beforePlay = false;
+      thePlayer.getHand().getCard(0).setReveal(true);
+      thePlayer.getHand().getCard(1).setReveal(true);
+      theHouse.getHand().getCard(1).setReveal(true);
     }
   }
+  if (roundOver) {
+    if (key == 'r') {
+      noLoop();
+      setup();
+      theHouse = new Dealer();
+      thePlayer.setHand(new Hand(0));
+      loop();
+      roundOver = false;
+      beforePlay = true;
+    }
+  }
+}
+
+
+void displayCards(Hand daHand, float x, float y) {
+  for (int i = 0, j = 0; i < daHand.getHandLength(); i++, j += 50) {
+    PImage card = loadImage("Cards/" + daHand.getCard(i).getImageString());
+    card.resize(180, 261);
+    if (daHand.getCard(i).isRevealed()) {
+      image(card, x +j, y);
+    } else {
+      image(back, x +j, y);
+    }
+  }
+}
+
+void checkBlackjack() {
+  boolean playerBJ = thePlayer.getHand().hasBlackjack();
+  boolean houseBJ = theHouse.getHand().hasBlackjack();
+  if (playerBJ && !houseBJ) {
+    playerTurn = false;
+    endRound(1, true);
+  } else if (!playerBJ && houseBJ) {
+    playerTurn = false;
+    endRound(2, true);
+  } else if (playerBJ && houseBJ) {
+    playerTurn = false;
+    endRound(3, true);
+  }
+}
+
+void play() {
+  theHouse.getHand().getCard(0).setReveal(true);
+  while (theHouse.getHand().getSum() < 17) {
+    theHouse.getHand().Hit(masterDeck);
+  }
+  if (theHouse.getHand().getSum() > 21) {
+    endRound(1, false);
+  } else if (theHouse.getHand().getSum() > thePlayer.getHand().getSum()) {
+    endRound(2, false);
+  } else if (theHouse.getHand().getSum() < thePlayer.getHand().getSum()) {
+    endRound(1, false);
+  } else if (theHouse.getHand().getSum() == thePlayer.getHand().getSum()) {
+    endRound(3, false);
+  }
+}
+
+void endRound(int mode, boolean wasBlackjack) {
+  textSize(20);
+  theHouse.getHand().getCard(0).setReveal(true); 
+  if (mode == 1) {
+    if (wasBlackjack) {
+      thePlayer.addWallet((int)(thePlayer.getbet() * 1.5) + thePlayer.getbet());
+    } else {
+      thePlayer.addWallet(thePlayer.getbet() * 2);
+    }
+    text("Lucky Ducky, I'll give you a little part of my vast fortune", 310, 450);
+  } else if (mode == 2) {
+    theHouse.getHand().getCard(0).setReveal(true);
+    text("You Lose, I'll be taking your money. Please come again", 310, 450);
+  } else if (mode == 3) {
+    thePlayer.addWallet(thePlayer.getbet());
+    text("It seems you've matched me! You'll lose when you play in the future", 310, 450);
+  }
+  thePlayer.makeBet(0);
+  if (thePlayer.getWallet() != 0) {
+    textSize(40);
+    delay(500);
+    text("Want to play again? \nPress R", 20, 700);
+    roundOver = true;
+  }
+}
