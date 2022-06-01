@@ -128,8 +128,10 @@ Nurdaulet --> Experimented with drawing cards and displaying them when hitting a
 
 Sloan --> Wrote most of the game logic in the main file including play() and endRound(). redid parts of checkBlackjack. Started getting actual display functionality with keyPressed(). Experimented with different card drawings. Discovered error with counting Aces that needs to be fixed.  
 
+-=-=-= 5/29 =-=-=-
+Sloan --> made game looping functionality with hitting R to reset the cards and start a new round. Implemented a betting system, but need to fix the error where u get more money when wallet is zero.
 
 -=-=-= 5/30 =-=-=- (SPECIAL DATE: Worked on one branch while the other experimented with functionalities, but didn't commit: Used screen sharing)
-
+Sloan --> fixed minor errors and bugs. finalized the display and logic for when you run out of money. 
 
 Nurdaulet --> Fixed the betting issue where going over displayed negative numbers and infinite wallet. Helped Sloan run through code and find minor bugs and errors to fix.
