@@ -5,6 +5,8 @@ boolean roundOver = false;
 boolean playerTurn = true;
 boolean beforePlay = true;
 boolean troll = false;
+boolean doubleDown = false;
+boolean split = false; 
 PImage back; 
 
 void setup() {
@@ -14,7 +16,7 @@ void setup() {
   size(1000, 800);
   background(#39FF20);
   banner();
-  
+
   fill(255);
   rect(32, 350, 265, 300);
   fill(0);
@@ -65,11 +67,17 @@ void draw() {
     }
     text("Wallet: "  + thePlayer.getWallet(), 37, 112);
     text("Bet: " + thePlayer.getbet(), 37, 135);
+    if (!split && !doubleDown) {
+      text("Play Mode: Normal", 37, 155);
+    }
     if (!beforePlay) {
       checkBlackjack();
+      if (thePlayer.getHand().getCard(0).getValue() == thePlayer.getHand().getCard(1).getValue()) {
+        text("Would you like to split your hand? Y/N", 500, 500);
+      }
     }
-  }
-  if (troll) {
+    if (troll) {
+    }
   }
 }
 
@@ -102,7 +110,7 @@ void keyPressed() {
     if (thePlayer.getbet() == 0) {
       fill(255);
       rect(32, 180, 265, 55);
-    
+
       fill(0);
       text("Put some money down", 37, 200);
     } else if (thePlayer.getbet() % 25 != 0) {
