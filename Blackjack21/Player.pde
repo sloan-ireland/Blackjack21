@@ -53,6 +53,7 @@ public class Player {
     }
     else if (wallet == 0) {
       noLoop();
+      delay(1000);
       background(0);
       clear();
       fill(255);
