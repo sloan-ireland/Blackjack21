@@ -159,9 +159,11 @@ void keyPressed() {
   if (splitAsk && key == 'y') {
     split = true;
     splitAsk = false;
+    
   }
   if (doubleDownAsk && key == 'y') {
     doubleDown = true;
+    playerTurn = true;
     doubleDownAsk = false;
 
   }
@@ -172,6 +174,7 @@ void keyPressed() {
   }
   if (doubleDownAsk && key == 'n') {
     doubleDownAsk = false;
+    playerTurn = true;
     doubleDown = false;
 
   }
