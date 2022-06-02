@@ -26,6 +26,11 @@ void setup() {
   text("Start - ENTER", 120, 160);
   text("Hit - 'H'", 93, 200);
   text("Stand - 'S'", 105, 240);
+  textAlign(LEFT);
+  fill(255);
+  rect(32, 270, 350, 200);
+  fill(0);
+  text("Message Center:", 40, 295);
 }
 
 void banner() {
@@ -54,9 +59,7 @@ void draw() {
     rect(430, 100, 250, 25);
     rect(430, 765, 245, 30);
     rect(30, 10, 200, 70);
-    rect(32,270, 265,200);
     fill(0);
-    text("Message Center:", 40,295);
     if (playerTurn) {
       text("The Dealer -- Sum: ? ? ? ", 440, 120);
     }
@@ -74,11 +77,11 @@ void draw() {
     if (!split && !doubleDown) {
       text("Play Mode: Normal", 37, 75);
     }
-    if(split) {
+    if (split) {
       text("Play Mode: Split", 37, 75);
     }
-    if(doubleDown) {
-      text("Play Mode: Double Down", 37, 75);
+    if (doubleDown) {
+      text("Play Mode: DD", 37, 75);
     }
     if (!beforePlay) {
       checkBlackjack();
@@ -123,17 +126,10 @@ void keyPressed() {
   }
   if (beforePlay && keyCode == ENTER) {
     if (thePlayer.getbet() == 0) {
-      fill(255);
-      rect(32, 170, 265, 55);
-
-      fill(0);
-      text("Put some money down", 37, 190);
+      messageCenter("Put some money down");
     } else if (thePlayer.getbet() % 25 != 0) {
       thePlayer.addWallet(thePlayer.getbet());
-      fill(255);
-      rect(32, 170, 265, 55);
-      fill(0);
-      text("You can only bet\nin intervals of $25", 37, 190);
+      messageCenter("You can only bet\nin intervals of $25");
       thePlayer.makeBet(0);
     } else {
       beforePlay = false;
@@ -161,6 +157,13 @@ void keyPressed() {
   }
 }
 
+void messageCenter(String message) {
+  fill(255);
+  rect(32, 270, 350, 200);
+  fill(0);
+  text("Message Center:", 40, 295);
+  text(message,40, 355);
+}
 
 void displayCards(Hand daHand, float x, float y) {
   for (int i = 0, j = 0; i < daHand.getHandLength(); i++, j += 50) {
