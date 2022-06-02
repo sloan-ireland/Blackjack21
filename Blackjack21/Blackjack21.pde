@@ -18,6 +18,11 @@ void setup() {
   size(1000, 800);
   background(#39FF20);
   banner();
+  doubleDown = false;
+  split = false;
+  splitAsk = false;
+  doubleDownAsk = false;
+
 
   fill(255);
   rect(32, 170, 265, 270);
@@ -72,21 +77,21 @@ void draw() {
     if (!split && !doubleDown) {
       text("Play Mode: Normal", 37, 155);
     }
-    if(split) {
+    if (split) {
       text("Play Mode: Split", 37, 155);
     }
-    if(doubleDown) {
+    if (doubleDown) {
       text("Play Mode: Double Down", 37, 155);
     }
-    if (!beforePlay) {
+    if (!beforePlay && thePlayer.getHand().getHandLength() == 2) {
       checkBlackjack();
       if (thePlayer.getHand().getCard(0).getValue() == thePlayer.getHand().getCard(1).getValue()) {
-        text("Would you like to split your hand? Y/N", 500, 500);
         splitAsk = true;
+        text("Would you like to split your hand? Y/N", 500, 500);
       }
-      if (thePlayer.getHand().getSum()  == 10 || thePlayer.getHand().getSum() == 10) {
-        text("Would you like to double down? Y/N", 500, 500);
+      if (thePlayer.getHand().getSum()  == 10 || thePlayer.getHand().getSum() == 11) {
         doubleDownAsk = true;
+        text("Would you like to double down? Y/N", 500, 500);
       }
     }
     if (troll) {
@@ -153,11 +158,24 @@ void keyPressed() {
   }
   if (splitAsk && key == 'y') {
     split = true;
+    splitAsk = false;
   }
   if (doubleDownAsk && key == 'y') {
     doubleDown = true;
+    doubleDownAsk = false;
+
   }
-}
+  if (splitAsk && key == 'n') {
+    splitAsk = false;
+    split = false;
+
+  }
+  if (doubleDownAsk && key == 'n') {
+    doubleDownAsk = false;
+    doubleDown = false;
+
+  }
+}  
 
 
 void displayCards(Hand daHand, float x, float y) {
