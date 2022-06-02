@@ -50,12 +50,13 @@ public class Player {
     if (currentBet > wallet) {
       bet = 0;
       fill(255);
-      rect(32, 180, 265, 55);
+      rect(32, 170, 265, 55);
       fill(0);
-      text("You poor person. \nMake a bet you can afford!", 37, 200);
+      text("You poor person. \nMake a bet you can afford!", 37, 190);
     }
     else if (wallet == 0) {
       noLoop();
+      delay(1000);
       background(0);
       clear();
       fill(255);
