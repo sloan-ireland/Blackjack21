@@ -6,7 +6,9 @@ boolean playerTurn = true;
 boolean beforePlay = true;
 boolean troll = false;
 boolean doubleDown = false;
+boolean doubleDownAsk = false;
 boolean split = false; 
+boolean splitAsk = false;
 PImage back; 
 
 void setup() {
@@ -18,12 +20,12 @@ void setup() {
   banner();
 
   fill(255);
-  rect(32, 350, 265, 300);
+  rect(32, 170, 265, 270);
   fill(0);
-  text("CONTROLS", 160, 380);
-  text("Start - ENTER", 120, 450);
-  text("Hit - 'H'", 93, 500);
-  text("Stand - 'S'", 105, 550);
+  text("CONTROLS", 160, 250);
+  text("Start - ENTER", 120, 310);
+  text("Hit - 'H'", 93, 360);
+  text("Stand - 'S'", 105, 410);
 }
 
 void banner() {
@@ -51,7 +53,7 @@ void draw() {
     fill(255);
     rect(430, 100, 250, 25);
     rect(430, 765, 245, 30);
-    rect(30, 90, 200, 55);
+    rect(30, 90, 200, 70);
     fill(0);
     if (playerTurn) {
       text("The Dealer -- Sum: ? ? ? ", 440, 120);
@@ -70,10 +72,21 @@ void draw() {
     if (!split && !doubleDown) {
       text("Play Mode: Normal", 37, 155);
     }
+    if(split) {
+      text("Play Mode: Split", 37, 155);
+    }
+    if(doubleDown) {
+      text("Play Mode: Double Down", 37, 155);
+    }
     if (!beforePlay) {
       checkBlackjack();
       if (thePlayer.getHand().getCard(0).getValue() == thePlayer.getHand().getCard(1).getValue()) {
         text("Would you like to split your hand? Y/N", 500, 500);
+        splitAsk = true;
+      }
+      if (thePlayer.getHand().getSum()  == 10 || thePlayer.getHand().getSum() == 10) {
+        text("Would you like to double down? Y/N", 500, 500);
+        doubleDownAsk = true;
       }
     }
     if (troll) {
@@ -109,16 +122,16 @@ void keyPressed() {
   if (beforePlay && keyCode == ENTER) {
     if (thePlayer.getbet() == 0) {
       fill(255);
-      rect(32, 180, 265, 55);
+      rect(32, 170, 265, 55);
 
       fill(0);
-      text("Put some money down", 37, 200);
+      text("Put some money down", 37, 190);
     } else if (thePlayer.getbet() % 25 != 0) {
       thePlayer.addWallet(thePlayer.getbet());
       fill(255);
-      rect(32, 180, 265, 55);
+      rect(32, 170, 265, 55);
       fill(0);
-      text("You can only bet\nin intervals of $25", 37, 200);
+      text("You can only bet\nin intervals of $25", 37, 190);
       thePlayer.makeBet(0);
     } else {
       beforePlay = false;
@@ -137,6 +150,12 @@ void keyPressed() {
       roundOver = false;
       beforePlay = true;
     }
+  }
+  if (splitAsk && key == 'y') {
+    split = true;
+  }
+  if (doubleDownAsk && key == 'y') {
+    doubleDown = true;
   }
 }
 
