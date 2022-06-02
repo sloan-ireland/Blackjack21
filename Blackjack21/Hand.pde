@@ -56,10 +56,10 @@ public class Hand {
   return false;
   }
   public void Hit(Deck daDeck) {
-    Card daCard = masterDeck.getTopCard();
     if (daDeck.size() == 0) {
         daDeck.refill();
-      }
+    }
+    Card daCard = masterDeck.getTopCard();
     if (sum < 21) { 
       currentHand.add(daCard);
       if (daCard.getValue() == 11 && sum < 11) {
