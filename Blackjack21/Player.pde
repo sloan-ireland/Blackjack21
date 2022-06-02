@@ -49,10 +49,7 @@ public class Player {
   public void makeBet(int currentBet) {
     if (currentBet > wallet) {
       bet = 0;
-      fill(255);
-      rect(32, 170, 265, 55);
-      fill(0);
-      text("You poor person. \nMake a bet you can afford!", 37, 190);
+      messageCenter("You poor person. \nMake a bet you can afford!");
     }
     else if (wallet == 0) {
       noLoop();
