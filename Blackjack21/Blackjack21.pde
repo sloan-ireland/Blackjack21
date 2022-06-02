@@ -20,12 +20,12 @@ void setup() {
   banner();
 
   fill(255);
-  rect(32, 170, 265, 270);
+  rect(32, 90, 265, 170);
   fill(0);
-  text("CONTROLS", 160, 250);
-  text("Start - ENTER", 120, 310);
-  text("Hit - 'H'", 93, 360);
-  text("Stand - 'S'", 105, 410);
+  text("CONTROLS", 160, 120);
+  text("Start - ENTER", 120, 160);
+  text("Hit - 'H'", 93, 200);
+  text("Stand - 'S'", 105, 240);
 }
 
 void banner() {
@@ -53,8 +53,10 @@ void draw() {
     fill(255);
     rect(430, 100, 250, 25);
     rect(430, 765, 245, 30);
-    rect(30, 90, 200, 70);
+    rect(30, 10, 200, 70);
+    rect(32,270, 265,200);
     fill(0);
+    text("Message Center:", 40,295);
     if (playerTurn) {
       text("The Dealer -- Sum: ? ? ? ", 440, 120);
     }
@@ -67,16 +69,16 @@ void draw() {
     if (!beforePlay) {
       text("The Player -- Sum: " + thePlayer.getHand().getSum(), 440, 787);
     }
-    text("Wallet: "  + thePlayer.getWallet(), 37, 112);
-    text("Bet: " + thePlayer.getbet(), 37, 135);
+    text("Wallet: "  + thePlayer.getWallet(), 37, 32);
+    text("Bet: " + thePlayer.getbet(), 37, 55);
     if (!split && !doubleDown) {
-      text("Play Mode: Normal", 37, 155);
+      text("Play Mode: Normal", 37, 75);
     }
     if(split) {
-      text("Play Mode: Split", 37, 155);
+      text("Play Mode: Split", 37, 75);
     }
     if(doubleDown) {
-      text("Play Mode: Double Down", 37, 155);
+      text("Play Mode: Double Down", 37, 75);
     }
     if (!beforePlay) {
       checkBlackjack();
