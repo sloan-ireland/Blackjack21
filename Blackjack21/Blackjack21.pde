@@ -94,11 +94,11 @@ void draw() {
       checkBlackjack();
       if (thePlayer.getHand().getCard(0).getValue() == thePlayer.getHand().getCard(1).getValue()) {
         splitAsk = true;
-        messageCenter("Would you like to split your hand? Y/N");
+        messageCenter("Would you like to split your hand?\nY/N");
       }
       if (thePlayer.getHand().getSum()  == 10 || thePlayer.getHand().getSum() == 11) {
         doubleDownAsk = true;
-        messageCenter("Would you like to double down? Y/N");
+        messageCenter("Would you like to double down?\nY/N");
       }
     }
     if (troll) {
@@ -160,22 +160,27 @@ void keyPressed() {
     split = true;
     splitAsk = false;
     workable = false;
+    messageCenter("");
   }
   if (doubleDownAsk && key == 'y') {
     doubleDown = true;
     doubleDownAsk = false;
     workable = false;
+    messageCenter("");
 
   }
   if (splitAsk && key == 'n') {
     splitAsk = false;
     split = false;
+    workable = false;
+    messageCenter("");
 
   }
   if (doubleDownAsk && key == 'n') {
     doubleDownAsk = false;
     doubleDown = false;
     workable = false;
+    messageCenter("");
 
   }
 }  
@@ -240,13 +245,13 @@ void endRound(int mode, boolean wasBlackjack) {
     } else {
       thePlayer.addWallet(thePlayer.getbet() * 2);
     }
-    text("Lucky Ducky, I'll give you a little part of my vast fortune", 310, 450);
+    messageCenter("Lucky Ducky, I'll give you a \nlittle part of my vast fortune");
   } else if (mode == 2) {
     theHouse.getHand().getCard(0).setReveal(true);
-    text("You Lose, I'll be taking your money. Please come again", 310, 450);
+    messageCenter("You Lose!\nI'll be taking your money.\nPlease come again");
   } else if (mode == 3) {
     thePlayer.addWallet(thePlayer.getbet());
-    text("It seems you've matched me! You'll lose when you play in the future", 310, 450);
+    messageCenter("It seems you've matched me!\nYou'll lose when you play \nin the future");
   }
   thePlayer.makeBet(0);
   if (thePlayer.getWallet() != 0) {
