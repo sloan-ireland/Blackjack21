@@ -83,7 +83,7 @@ void draw() {
       text("Play Mode: Normal", 37, 75);
     }
     if (split) {
-      text("Play Mode: Split", 37, 155);
+      text("Play Mode: Split", 37, 75);
     }
     if (doubleDown) {
       text("Play Mode: DD", 37, 75);
@@ -92,11 +92,11 @@ void draw() {
       checkBlackjack();
       if (thePlayer.getHand().getCard(0).getValue() == thePlayer.getHand().getCard(1).getValue()) {
         splitAsk = true;
-        text("Would you like to split your hand? Y/N", 500, 500);
+        messageCenter("Would you like to split your hand? Y/N");
       }
       if (thePlayer.getHand().getSum()  == 10 || thePlayer.getHand().getSum() == 11) {
         doubleDownAsk = true;
-        text("Would you like to double down? Y/N", 500, 500);
+        messageCenter("Would you like to double down? Y/N");
       }
     }
     if (troll) {
@@ -161,7 +161,6 @@ void keyPressed() {
   }
   if (doubleDownAsk && key == 'y') {
     doubleDown = true;
-    playerTurn = true;
     doubleDownAsk = false;
 
   }
@@ -172,7 +171,6 @@ void keyPressed() {
   }
   if (doubleDownAsk && key == 'n') {
     doubleDownAsk = false;
-    playerTurn = true;
     doubleDown = false;
 
   }
