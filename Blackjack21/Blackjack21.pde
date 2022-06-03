@@ -9,6 +9,7 @@ boolean doubleDown = false;
 boolean doubleDownAsk = false;
 boolean split = false; 
 boolean splitAsk = false;
+boolean workable = true;
 PImage back; 
 
 void setup() {
@@ -22,6 +23,7 @@ void setup() {
   split = false;
   splitAsk = false;
   doubleDownAsk = false;
+  workable = true;
 
 
   fill(255);
@@ -88,7 +90,7 @@ void draw() {
     if (doubleDown) {
       text("Play Mode: DD", 37, 75);
     }
-    if (!beforePlay && thePlayer.getHand().getHandLength() == 2) {
+    if (!beforePlay && thePlayer.getHand().getHandLength() == 2 && workable) {
       checkBlackjack();
       if (thePlayer.getHand().getCard(0).getValue() == thePlayer.getHand().getCard(1).getValue()) {
         splitAsk = true;
@@ -157,11 +159,12 @@ void keyPressed() {
   if (splitAsk && key == 'y') {
     split = true;
     splitAsk = false;
-    
+    workable = false;
   }
   if (doubleDownAsk && key == 'y') {
     doubleDown = true;
     doubleDownAsk = false;
+    workable = false;
 
   }
   if (splitAsk && key == 'n') {
@@ -172,6 +175,7 @@ void keyPressed() {
   if (doubleDownAsk && key == 'n') {
     doubleDownAsk = false;
     doubleDown = false;
+    workable = false;
 
   }
 }  
