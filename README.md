@@ -143,7 +143,7 @@ Sloan --> fixed minor errors and bugs. finalized the display and logic for when 
 Nurdaulet --> Fixed the betting issue where going over displayed negative numbers and infinite wallet. Helped Sloan run through code and find minor bugs and errors to fix.
 
 
--=-=-= 5/31 =-=-=-
-
+-=-=-= 5/31 and 6/1=-=-=-
+Sloan --> worked on the display messages for splitting and double down. Started working on a center for where all messages will be dispalued
 
 Nurdaulet --> Worked on proper displaying of splitting and doubling down: Incorrect display when the prompt window shows up. Fixed the message box error with improper aligning.
