@@ -83,7 +83,7 @@ void draw() {
       text("Play Mode: Normal", 37, 75);
     }
     if (split) {
-      text("Play Mode: Split", 37, 155);
+      text("Play Mode: Split", 37, 75);
     }
     if (doubleDown) {
       text("Play Mode: DD", 37, 75);
@@ -161,7 +161,6 @@ void keyPressed() {
   }
   if (doubleDownAsk && key == 'y') {
     doubleDown = true;
-    playerTurn = true;
     doubleDownAsk = false;
 
   }
@@ -172,7 +171,6 @@ void keyPressed() {
   }
   if (doubleDownAsk && key == 'n') {
     doubleDownAsk = false;
-    playerTurn = true;
     doubleDown = false;
 
   }
