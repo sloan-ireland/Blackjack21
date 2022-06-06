@@ -167,6 +167,7 @@ void keyPressed() {
     doubleDownAsk = false;
     workable = false;
     messageCenter("");
+    doubleDown();
 
   }
   if (splitAsk && key == 'n') {
@@ -218,6 +219,12 @@ void checkBlackjack() {
     playerTurn = false;
     endRound(3, true);
   }
+}
+
+void doubleDown() {
+  playerTurn = false;
+  thePlayer.getHand().Hit(masterDeck);
+  play();
 }
 
 void play() {
