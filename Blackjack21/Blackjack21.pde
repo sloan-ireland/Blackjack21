@@ -1,6 +1,7 @@
 Deck masterDeck = new Deck();
 Dealer theHouse = new Dealer();
 Player thePlayer = new Player();
+Hand splitHand;
 boolean roundOver = false;
 boolean playerTurn = true;
 boolean beforePlay = true;
@@ -98,7 +99,7 @@ void draw() {
       }
       if (thePlayer.getHand().getSum()  == 10 || thePlayer.getHand().getSum() == 11) {
         doubleDownAsk = true;
-        messageCenter("Would you like to double down?\nY/N");
+        messageCenter("Would you like to double down?\nY/N\nNote this action will double\nyour bet");
       }
     }
     if (troll) {
@@ -110,14 +111,18 @@ void draw() {
 void keyPressed() {
   if (!beforePlay && playerTurn) { 
     if (key == 's') {
-      playerTurn = false;
-      play();
+      if (!split) {
+        playerTurn = false;
+        play();
+      }
     }
     if (key == 'h') {
       thePlayer.getHand().Hit(masterDeck);
-      if (thePlayer.getHand().getSum() > 21) {
-        playerTurn = false;
-        endRound(2, false);
+      if (!split) {
+        if (thePlayer.getHand().getSum() > 21) {
+          playerTurn = false;
+          endRound(2, false);
+        }
       }
     }
   }
@@ -161,6 +166,7 @@ void keyPressed() {
     splitAsk = false;
     workable = false;
     messageCenter("");
+    split();
   }
   if (doubleDownAsk && key == 'y') {
     doubleDown = true;
@@ -168,21 +174,18 @@ void keyPressed() {
     workable = false;
     messageCenter("");
     doubleDown();
-
   }
   if (splitAsk && key == 'n') {
     splitAsk = false;
     split = false;
     workable = false;
     messageCenter("");
-
   }
   if (doubleDownAsk && key == 'n') {
     doubleDownAsk = false;
     doubleDown = false;
     workable = false;
     messageCenter("");
-
   }
 }  
 
@@ -191,7 +194,7 @@ void messageCenter(String message) {
   rect(32, 270, 350, 200);
   fill(0);
   text("Message Center:", 40, 295);
-  text(message,40, 355);
+  text(message, 40, 355);
 }
 
 void displayCards(Hand daHand, float x, float y) {
@@ -224,9 +227,15 @@ void checkBlackjack() {
 void doubleDown() {
   playerTurn = false;
   thePlayer.getHand().Hit(masterDeck);
+  thePlayer.addWallet(thePlayer.getbet());
+  thePlayer.makeBet(thePlayer.getbet() * 2);
   play();
 }
 
+void split() {
+  splitHand = new Hand(2);
+  displayCards(splitHand, 30, 500);
+}
 void play() {
   theHouse.getHand().getCard(0).setReveal(true);
   while (theHouse.getHand().getSum() < 17) {
@@ -241,6 +250,9 @@ void play() {
   } else if (theHouse.getHand().getSum() == thePlayer.getHand().getSum()) {
     endRound(3, false);
   }
+}
+
+void splitPlay() {
 }
 
 void endRound(int mode, boolean wasBlackjack) {
@@ -259,12 +271,20 @@ void endRound(int mode, boolean wasBlackjack) {
   } else if (mode == 3) {
     thePlayer.addWallet(thePlayer.getbet());
     messageCenter("It seems you've matched me!\nYou'll lose when you play \nin the future");
-  }
+  } 
   thePlayer.makeBet(0);
-  if (thePlayer.getWallet() != 0) {
+  if (thePlayer.getWallet() != 0 && !split) {
     textSize(40);
     delay(500);
     text("Want to play again? \nPress R", 20, 700);
     roundOver = true;
+  }
+  if (thePlayer.getWallet() != 0 && split) {
+    textSize(40);
+    delay(500);
+    text("Want to play again? \nPress R", 20, 700);
+    roundOver = true;
+  }
+  if (split) {
   }
 }
