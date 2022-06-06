@@ -161,3 +161,9 @@ Sloan & Nurdaulet --> Worked on messageCenter functionality and proper display o
 
 
 Sloan & Nurdaulet --> Finished Double Down method, started working on split.
+
+
+-=-=-= 6/5 =-=-=-
+
+
+Nurdaulet --> Fixed bug when the game doesn't lock when given the prompt to Split or DD with Y/N: Game didn't lock and you were able to call double down AFTER hitting once already
