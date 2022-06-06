@@ -155,3 +155,9 @@ Nurdaulet --> Worked on proper displaying of splitting and doubling down: Incorr
 
 
 Sloan & Nurdaulet --> Worked on messageCenter functionality and proper display of double down and split methods: Fixed error with messages not going away after making a split/dd choice
+
+
+-=-=-= 6/5 =-=-=- (SPECIAL DATE: Worked on one branch while the other experimented with functionalities, but didn't commit: Used screen sharing)
+
+
+Sloan & Nurdaulet --> Finished Double Down method, started working on split.
