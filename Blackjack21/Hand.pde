@@ -30,6 +30,11 @@ public class Hand {
     }
   }
   
+  public Hand(Card one) {
+    currentHand = new ArrayList<Card>();
+    currentHand.add(one);
+    sum += one.getValue();
+  }
   public Card getCard(int card) {
     return currentHand.get(card);
   }
@@ -39,6 +44,10 @@ public class Hand {
   }
   public int getSum() {
     return sum;
+  }
+  
+  public Card removeCard(int card) {
+    return currentHand.remove(card);
   }
   
   public boolean hasBlackjack() {

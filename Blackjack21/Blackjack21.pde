@@ -60,6 +60,13 @@ void handSetup() {
   displayCards(theHouse.getHand(), 430, 130);
   text("Player", 470, 700);
   displayCards(thePlayer.getHand(), 430, 500);
+  if (split) {
+    displayCards(splitHand, 30, 500);
+    fill(255);
+    rect(30, 765, 245, 30);
+    fill(0);
+    text("The Player -- Sum: " + splitHand.getSum(), 40, 787);
+  }
 }
 void draw() {
   if (!troll) {
@@ -246,9 +253,9 @@ void doubleDown() {
 * Split method will create a new hand and alternate
 */
 void split() {
-  splitHand = new Hand(2);
-  //
-  displayCards(splitHand, 30, 500);
+  splitHand = new Hand(thePlayer.getHand().removeCard(0));
+  splitHand.Hit(masterDeck);
+  thePlayer.getHand().Hit(masterDeck);
 }
 
 
