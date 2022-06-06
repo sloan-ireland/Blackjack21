@@ -97,9 +97,11 @@ void draw() {
       checkBlackjack();
       if (thePlayer.getHand().getCard(0).getValue() == thePlayer.getHand().getCard(1).getValue()) {
         splitAsk = true;
+        playerTurn = false;
         messageCenter("Would you like to split your hand?\nY/N");
       }
       if (thePlayer.getHand().getSum()  == 10 || thePlayer.getHand().getSum() == 11) {
+        playerTurn = false;
         doubleDownAsk = true;
         messageCenter("Would you like to double down?\nY/N\nNote this action will double\nyour bet");
       }
@@ -169,6 +171,7 @@ void keyPressed() {
     split = true;
     splitAsk = false;
     workable = false;
+    playerTurn = true;
     messageCenter("");
     split();
   }
@@ -176,6 +179,7 @@ void keyPressed() {
     doubleDown = true;
     doubleDownAsk = false;
     workable = false;
+    playerTurn = true;
     messageCenter("");
     doubleDown();
   }
@@ -183,12 +187,14 @@ void keyPressed() {
     splitAsk = false;
     split = false;
     workable = false;
+    playerTurn = true;
     messageCenter("");
   }
   if (doubleDownAsk && key == 'n') {
     doubleDownAsk = false;
     doubleDown = false;
     workable = false;
+    playerTurn = true;
     messageCenter("");
   }
 }  
@@ -230,9 +236,9 @@ void checkBlackjack() {
 
 void doubleDown() {
   playerTurn = false;
-  thePlayer.getHand().Hit(masterDeck);
   thePlayer.addWallet(thePlayer.getbet());
   thePlayer.makeBet(thePlayer.getbet() * 2);
+  thePlayer.getHand().Hit(masterDeck);
   play();
 }
 
