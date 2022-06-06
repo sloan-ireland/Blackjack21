@@ -11,6 +11,7 @@ boolean doubleDownAsk = false;
 boolean split = false; 
 boolean splitAsk = false;
 boolean workable = true;
+boolean splitH = false; // the split hand
 PImage back; 
 
 void setup() {
@@ -25,6 +26,7 @@ void setup() {
   splitAsk = false;
   doubleDownAsk = false;
   workable = true;
+  splitH = false; // The split hand
 
 
   fill(255);
@@ -115,6 +117,7 @@ void keyPressed() {
         playerTurn = false;
         play();
       }
+      // Insert split code here
     }
     if (key == 'h') {
       thePlayer.getHand().Hit(masterDeck);
@@ -124,6 +127,7 @@ void keyPressed() {
           endRound(2, false);
         }
       }
+      // Insert split code here
     }
   }
   if (beforePlay) {
@@ -232,10 +236,16 @@ void doubleDown() {
   play();
 }
 
+/**
+* Split method will create a new hand and alternate
+*/
 void split() {
   splitHand = new Hand(2);
+  //
   displayCards(splitHand, 30, 500);
 }
+
+
 void play() {
   theHouse.getHand().getCard(0).setReveal(true);
   while (theHouse.getHand().getSum() < 17) {
