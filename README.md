@@ -166,4 +166,4 @@ Sloan & Nurdaulet --> Finished Double Down method, started working on split.
 -=-=-= 6/5 =-=-=-
 
 
-Nurdaulet --> Fixed bug when the game doesn't lock when given the prompt to Split or DD with Y/N: Game didn't lock and you were able to call double down AFTER hitting once already
+Nurdaulet --> Fixed bug when the game doesn't lock when given the prompt to Split or DD with Y/N: Game didn't lock and you were able to call double down AFTER hitting once already. Also fixed the bug when the split screen shows up when the value of the cards is 10 each, but the suit is different (e.g King and 10)

@@ -102,7 +102,10 @@ void draw() {
     }
     if (!beforePlay && thePlayer.getHand().getHandLength() == 2 && workable) {
       checkBlackjack();
-      if (thePlayer.getHand().getCard(0).getValue() == thePlayer.getHand().getCard(1).getValue()) {
+      if (
+      thePlayer.getHand().getCard(0).getValue() == thePlayer.getHand().getCard(1).getValue() && 
+      thePlayer.getHand().getCard(0).getStringValue().equals(thePlayer.getHand().getCard(1).getStringValue())
+      ) {
         splitAsk = true;
         playerTurn = false;
         messageCenter("Would you like to split your hand?\nY/N");
