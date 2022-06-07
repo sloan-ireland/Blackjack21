@@ -277,9 +277,11 @@ void checkBlackjack() {
   } else if (!playerBJ && houseBJ) {
     playerTurn = false;
     endRound(2, true);
+    naturalBlackjack = true;
   } else if (playerBJ && houseBJ) {
     playerTurn = false;
     endRound(3, true);
+    naturalBlackjack = true;
   }
 }
 
