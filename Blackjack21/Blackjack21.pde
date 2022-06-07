@@ -8,19 +8,19 @@ boolean beforePlay = true;
 boolean troll = false;
 boolean doubleDown = false;
 boolean doubleDownAsk = false;
-boolean split = false; 
+boolean split = false;
 boolean splitAsk = false;
 boolean workable = true;
 boolean oneHand = false;
 boolean lostHandOne = false;
 boolean lostHandTwo = false;
 boolean naturalBlackjack = false;
-PImage back; 
+PImage back;
 
 void setup() {
   playerTurn = true;
   back = loadImage("Cards/back.png");
-  back.resize(180, 261); 
+  back.resize(180, 261);
   size(1000, 800);
   background(#39FF20);
   banner();
@@ -46,6 +46,8 @@ void setup() {
   text("Message Center:", 40, 295);
 }
 
+
+
 void banner() {
   String title = "The Game of Blackjack";
   fill(255);
@@ -57,6 +59,8 @@ void banner() {
   textSize(20);
   text("The House Always Wins! Play at your own risk :-)", 500, 70);
 }
+
+
 
 void handSetup() {
   textAlign(LEFT);
@@ -71,6 +75,10 @@ void handSetup() {
     text("The Player -- Sum: " + splitHand.getSum(), 40, 787);
   }
 }
+
+
+
+
 void draw() {
   if (!troll) {
     textSize(20);
@@ -106,16 +114,20 @@ void draw() {
     if (!beforePlay && thePlayer.getHand().getHandLength() == 2 && workable && !split && !doubleDown) {
       checkBlackjack();
       if (!naturalBlackjack) {
-        if (thePlayer.getHand().getCard(0).getValue() == thePlayer.getHand().getCard(1).getValue()) {
-          splitAsk = true;
-          playerTurn = false;
-          messageCenter("Would you like to split your hand?\nY/N");
-        }
-        if (thePlayer.getHand().getSum()  == 10 || thePlayer.getHand().getSum() == 11) {
-          playerTurn = false;
-          doubleDownAsk = true;
-          messageCenter("Would you like to double down?\nY/N\nNote this action will double\nyour bet");
-        }
+      if (
+      thePlayer.getHand().getCard(0).getValue() == thePlayer.getHand().getCard(1).getValue() &&
+      thePlayer.getHand().getCard(0).getStringValue().equals(thePlayer.getHand().getCard(1).getStringValue()) &&
+      thePlayer.getHand().getCard(0).getValue() != 5
+      ) {
+        splitAsk = true;
+        playerTurn = false;
+        messageCenter("Would you like to split your hand?\nY/N");
+      }
+      if (thePlayer.getHand().getSum()  == 10 || thePlayer.getHand().getSum() == 11) {
+        playerTurn = false;
+        doubleDownAsk = true;
+        messageCenter("Would you like to double down?\nY/N\nNote this action will double\nyour bet");
+      }
       }
     }
     if (troll) {
@@ -125,7 +137,7 @@ void draw() {
 
 
 void keyPressed() {
-  if (!beforePlay && playerTurn) { 
+  if (!beforePlay && playerTurn) {
     if (key == 's') {
       if (!split) {
         playerTurn = false;
@@ -230,7 +242,7 @@ void keyPressed() {
     playerTurn = true;
     messageCenter("");
   }
-}  
+}
 
 void messageCenter(String message) {
   fill(255);
@@ -252,6 +264,8 @@ void displayCards(Hand daHand, float x, float y) {
   }
 }
 
+
+
 void checkBlackjack() {
   boolean playerBJ = thePlayer.getHand().hasBlackjack();
   boolean houseBJ = theHouse.getHand().hasBlackjack();
@@ -268,6 +282,8 @@ void checkBlackjack() {
   }
 }
 
+
+
 void doubleDown() {
   playerTurn = false;
   thePlayer.addWallet(thePlayer.getbet());
@@ -275,6 +291,8 @@ void doubleDown() {
   thePlayer.getHand().Hit(masterDeck);
   play();
 }
+
+
 
 /**
  * Split method will create a new hand and alternate
@@ -285,6 +303,7 @@ void split() {
   thePlayer.getHand().Hit(masterDeck);
   thePlayer.getHand().setSum(thePlayer.getHand().getSum() - splitHand.getCard(0).getValue());
 }
+
 
 
 void play() {
@@ -303,6 +322,8 @@ void play() {
   }
 }
 
+
+
 void splitPlay() {
   theHouse.getHand().getCard(0).setReveal(true);
   while (theHouse.getHand().getSum() < 17) {
@@ -316,7 +337,7 @@ void splitPlay() {
   }
   if (lostHandOne && lostHandTwo) {
     thePlayer.makeBet(0);
-    
+
   }
   else if (lostHandOne || lostHandTwo) {
     thePlayer.addWallet((int)(0.5 * thePlayer.getbet()));
@@ -330,7 +351,7 @@ void splitPlay() {
     if (theHouse.getHand().getSum() == thePlayer.getHand().getSum()) {
       push++;
     }
-    if (push == 0) { 
+    if (push == 0) {
       thePlayer.addWallet(2 * thePlayer.getbet());
     } else if (push == 1) {
       thePlayer.addWallet((int)(1.5 * thePlayer.getbet()));
@@ -345,9 +366,11 @@ void splitPlay() {
     roundOver = true;
 }
 
+
+
 void endRound(int mode, boolean wasBlackjack) {
   textSize(20);
-  theHouse.getHand().getCard(0).setReveal(true); 
+  theHouse.getHand().getCard(0).setReveal(true);
   if (mode == 1) {
     if (wasBlackjack) {
       thePlayer.addWallet((int)(thePlayer.getbet() * 1.5) + thePlayer.getbet());
@@ -361,7 +384,7 @@ void endRound(int mode, boolean wasBlackjack) {
   } else if (mode == 3) {
     thePlayer.addWallet(thePlayer.getbet());
     messageCenter("It seems you've matched me!\nYou'll lose when you play \nin the future");
-  } 
+  }
   thePlayer.makeBet(0);
   if (thePlayer.getWallet() != 0 && !split) {
     textSize(40);

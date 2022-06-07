@@ -19,6 +19,10 @@ public class Card {
     }
   }
   
+  public String getStringValue(){
+    return value;
+  }
+  
   public int getValue() {
     if (value.equals("jack") || value.equals("queen") || value.equals("king")) {
       return 10;
