@@ -43,6 +43,8 @@ void setup() {
   text("Message Center:", 40, 295);
 }
 
+
+
 void banner() {
   String title = "The Game of Blackjack";
   fill(255);
@@ -54,6 +56,8 @@ void banner() {
   textSize(20);
   text("The House Always Wins! Play at your own risk :-)", 500, 70);
 }
+
+
 
 void handSetup() {
   textAlign(LEFT);
@@ -68,6 +72,10 @@ void handSetup() {
     text("The Player -- Sum: " + splitHand.getSum(), 40, 787);
   }
 }
+
+
+
+
 void draw() {
   if (!troll) {
     textSize(20);
@@ -104,7 +112,8 @@ void draw() {
       checkBlackjack();
       if (
       thePlayer.getHand().getCard(0).getValue() == thePlayer.getHand().getCard(1).getValue() && 
-      thePlayer.getHand().getCard(0).getStringValue().equals(thePlayer.getHand().getCard(1).getStringValue())
+      thePlayer.getHand().getCard(0).getStringValue().equals(thePlayer.getHand().getCard(1).getStringValue()) &&
+      thePlayer.getHand().getCard(0).getValue() != 5
       ) {
         splitAsk = true;
         playerTurn = false;
@@ -229,6 +238,8 @@ void displayCards(Hand daHand, float x, float y) {
   }
 }
 
+
+
 void checkBlackjack() {
   boolean playerBJ = thePlayer.getHand().hasBlackjack();
   boolean houseBJ = theHouse.getHand().hasBlackjack();
@@ -244,6 +255,8 @@ void checkBlackjack() {
   }
 }
 
+
+
 void doubleDown() {
   playerTurn = false;
   thePlayer.addWallet(thePlayer.getbet());
@@ -251,6 +264,8 @@ void doubleDown() {
   thePlayer.getHand().Hit(masterDeck);
   play();
 }
+
+
 
 /**
 * Split method will create a new hand and alternate
@@ -260,6 +275,7 @@ void split() {
   splitHand.Hit(masterDeck);
   thePlayer.getHand().Hit(masterDeck);
 }
+
 
 
 void play() {
@@ -278,8 +294,12 @@ void play() {
   }
 }
 
+
+
 void splitPlay() {
 }
+
+
 
 void endRound(int mode, boolean wasBlackjack) {
   textSize(20);
