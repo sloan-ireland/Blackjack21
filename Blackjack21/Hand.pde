@@ -46,6 +46,9 @@ public class Hand {
     return sum;
   }
   
+  public void setSum(int num) {
+    sum = num;
+  }
   public Card removeCard(int card) {
     return currentHand.remove(card);
   }
