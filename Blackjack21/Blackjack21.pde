@@ -11,7 +11,6 @@ boolean doubleDownAsk = false;
 boolean split = false; 
 boolean splitAsk = false;
 boolean workable = true;
-boolean splitH = false; // the split hand
 PImage back; 
 
 void setup() {
