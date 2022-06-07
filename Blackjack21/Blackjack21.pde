@@ -2,6 +2,7 @@ Deck masterDeck = new Deck();
 Dealer theHouse = new Dealer();
 Player thePlayer = new Player();
 Hand splitHand;
+
 boolean roundOver = false;
 boolean playerTurn = true;
 boolean beforePlay = true;
