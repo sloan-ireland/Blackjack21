@@ -2,6 +2,7 @@ Deck masterDeck = new Deck();
 Dealer theHouse = new Dealer();
 Player thePlayer = new Player();
 Hand splitHand;
+
 boolean roundOver = false;
 boolean playerTurn = true;
 boolean beforePlay = true;
@@ -114,20 +115,20 @@ void draw() {
     if (!beforePlay && thePlayer.getHand().getHandLength() == 2 && workable && !split && !doubleDown) {
       checkBlackjack();
       if (!naturalBlackjack) {
-      if (
-      thePlayer.getHand().getCard(0).getValue() == thePlayer.getHand().getCard(1).getValue() &&
-      thePlayer.getHand().getCard(0).getStringValue().equals(thePlayer.getHand().getCard(1).getStringValue()) &&
-      thePlayer.getHand().getCard(0).getValue() != 5
-      ) {
-        splitAsk = true;
-        playerTurn = false;
-        messageCenter("Would you like to split your hand?\nY/N");
-      }
-      if (thePlayer.getHand().getSum()  == 10 || thePlayer.getHand().getSum() == 11) {
-        playerTurn = false;
-        doubleDownAsk = true;
-        messageCenter("Would you like to double down?\nY/N\nNote this action will double\nyour bet");
-      }
+        if (
+          thePlayer.getHand().getCard(0).getValue() == thePlayer.getHand().getCard(1).getValue() &&
+          thePlayer.getHand().getCard(0).getStringValue().equals(thePlayer.getHand().getCard(1).getStringValue()) &&
+          thePlayer.getHand().getCard(0).getValue() != 5
+          ) {
+          splitAsk = true;
+          playerTurn = false;
+          messageCenter("Would you like to split your hand?\nY/N");
+        }
+        if (thePlayer.getHand().getSum()  == 10 || thePlayer.getHand().getSum() == 11) {
+          playerTurn = false;
+          doubleDownAsk = true;
+          messageCenter("Would you like to double down?\nY/N\nNote this action will double\nyour bet");
+        }
       }
     }
     if (troll) {
@@ -337,13 +338,10 @@ void splitPlay() {
   }
   if (lostHandOne && lostHandTwo) {
     thePlayer.makeBet(0);
-
-  }
-  else if (lostHandOne || lostHandTwo) {
+  } else if (lostHandOne || lostHandTwo) {
     thePlayer.addWallet((int)(0.5 * thePlayer.getbet()));
     thePlayer.makeBet(0);
-  }
-  else {
+  } else {
     int push = 0;
     if (theHouse.getHand().getSum() == splitHand.getSum()) {
       push++;
@@ -361,9 +359,9 @@ void splitPlay() {
   }
   thePlayer.makeBet(0);
   textSize(40);
-    delay(500);
-    text("Want to play again? \nPress R", 20, 700);
-    roundOver = true;
+  delay(500);
+  text("Want to play again? \nPress R", 20, 700);
+  roundOver = true;
 }
 
 
