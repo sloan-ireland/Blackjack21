@@ -30,6 +30,7 @@ void setup() {
   splitAsk = false;
   doubleDownAsk = false;
   workable = true;
+  naturalBlackjack = false;
 
 
 
@@ -305,6 +306,8 @@ void split() {
   splitHand.Hit(masterDeck);
   thePlayer.getHand().Hit(masterDeck);
   thePlayer.getHand().setSum(thePlayer.getHand().getSum() - splitHand.getCard(0).getValue());
+  thePlayer.addWallet(thePlayer.getbet());
+  thePlayer.makeBet(2 * thePlayer.getbet());
 }
 
 
