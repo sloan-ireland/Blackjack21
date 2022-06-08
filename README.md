@@ -163,7 +163,15 @@ Sloan & Nurdaulet --> Worked on messageCenter functionality and proper display o
 Sloan & Nurdaulet --> Finished Double Down method, started working on split.
 
 
--=-=-= 6/5 =-=-=-
+-=-=-= 6/6 =-=-=-
 
 
 Nurdaulet --> Fixed bug when the game doesn't lock when given the prompt to Split or DD with Y/N: Game didn't lock and you were able to call double down AFTER hitting once already. Also fixed the bug when the split screen shows up when the value of the cards is 10 each, but the suit is different (e.g King and 10)
+
+Sloan --> Finished first draft of the split game logic, and continued working on bugs that arose from splitting/dd in display. Edited incorrect message pop-ups and edge cases such as double 5s and natural blackjack errors.
+
+
+-=-=-= 6/7 =-=-=-
+
+
+Nurdaulet --> Fixed bug for naturalBlackjack not setting to true with each blackjack call
