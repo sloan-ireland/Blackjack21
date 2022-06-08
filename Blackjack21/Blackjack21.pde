@@ -304,6 +304,9 @@ void doubleDown() {
 void split() {
   splitHand = new Hand(thePlayer.getHand().removeCard(0));
   splitHand.Hit(masterDeck);
+  if (thePlayer.getHand().getCard(0).countedAs() == 1) {
+    thePlayer.getHand().getCard(0).countedAs(11);
+  }
   thePlayer.getHand().Hit(masterDeck);
   thePlayer.getHand().setSum(thePlayer.getHand().getSum() - splitHand.getCard(0).getValue());
   thePlayer.addWallet(thePlayer.getbet());
@@ -376,7 +379,13 @@ void endRound(int mode, boolean wasBlackjack) {
   theHouse.getHand().getCard(0).setReveal(true);
   if (mode == 1) {
     if (wasBlackjack) {
-      thePlayer.addWallet((int)(thePlayer.getbet() * 1.5) + thePlayer.getbet());
+      if (thePlayer.getbet() % 5 == 0 && thePlayer.getbet() % 10 != 0) {
+        thePlayer.addWallet((int)(((thePlayer.getbet() + 25/2) / 25) * 25) + thePlayer.getbet());
+      }
+      else {
+        thePlayer.addWallet((int)(thePlayer.getbet() * 1.5) + thePlayer.getbet());
+      }
+      
     } else {
       thePlayer.addWallet(thePlayer.getbet() * 2);
     }
