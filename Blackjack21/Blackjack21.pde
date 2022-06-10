@@ -146,6 +146,7 @@ void keyPressed() {
         play();
       } else if (oneHand) {
         oneHand = false;
+        messageCenter("Playing 2nd Hand");
       } else {
         playerTurn = false;
         splitPlay();
@@ -162,12 +163,13 @@ void keyPressed() {
       } else if (oneHand) {
         splitHand.Hit(masterDeck);
         if (splitHand.getSum() > 21) {
-          messageCenter("1st split hand is a bust\nGo cry to your mommy");
+          messageCenter("1st split hand is a bust\nGo cry to your mommy\nNow Go Play 2nd Hand");
           lostHandOne = true;
           oneHand = false;
         }
       } else {
         thePlayer.getHand().Hit(masterDeck);
+        messageCenter("Playing 2nd Hand");
         if (thePlayer.getHand().getSum() > 21) {
           messageCenter("2nd split hand is a bust\nGo cry to your mommy");
           lostHandTwo = true;
@@ -304,10 +306,14 @@ void doubleDown() {
 void split() {
   splitHand = new Hand(thePlayer.getHand().removeCard(0));
   splitHand.Hit(masterDeck);
+  if (thePlayer.getHand().getCard(0).countedAs() == 1) {
+    thePlayer.getHand().getCard(0).countedAs(11);
+  }
   thePlayer.getHand().Hit(masterDeck);
   thePlayer.getHand().setSum(thePlayer.getHand().getSum() - splitHand.getCard(0).getValue());
   thePlayer.addWallet(thePlayer.getbet());
   thePlayer.makeBet(2 * thePlayer.getbet());
+  messageCenter("Playing 1st Hand");
 }
 
 
@@ -376,7 +382,13 @@ void endRound(int mode, boolean wasBlackjack) {
   theHouse.getHand().getCard(0).setReveal(true);
   if (mode == 1) {
     if (wasBlackjack) {
-      thePlayer.addWallet((int)(thePlayer.getbet() * 1.5) + thePlayer.getbet());
+      if (thePlayer.getbet() % 5 == 0 && thePlayer.getbet() % 10 != 0) {
+        thePlayer.addWallet((int)(((thePlayer.getbet() + 25/2) / 25) * 25) + thePlayer.getbet());
+      }
+      else {
+        thePlayer.addWallet((int)(thePlayer.getbet() * 1.5) + thePlayer.getbet());
+      }
+      
     } else {
       thePlayer.addWallet(thePlayer.getbet() * 2);
     }
