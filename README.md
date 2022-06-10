@@ -175,3 +175,19 @@ Sloan --> Finished first draft of the split game logic, and continued working on
 
 
 Nurdaulet --> Fixed bug for naturalBlackjack not setting to true with each blackjack call
+
+Sloan --> Fixed blackjack betting error when it adds numbers outside of multiples of 25
+
+
+-=-=-= 6/8 =-=-=-
+
+
+Nurdaulet --> Fixed issue with betting during splits: Bet didn't double and winning wasn't proportional
+
+Sloan --> Began fixing Ace functionality on splits
+
+
+-=-=-= 6/9 =-=-=-
+
+
+Nurdaulet --> Fixed bug with betting during slits and double downs: You were able to DD and split when you had less money in the wallet than the bet, thus allowing glitched money to come in. Added a check that sees if the current wallet is equal to or greater than the bet to allow DD and Splits.
