@@ -34,7 +34,8 @@ void setup() {
   workable = true;
   naturalBlackjack = false;
   roundOver = false;
-
+  lostHandOne = false;     
+  lostHandTwo = false;
 
 
   fill(255);
