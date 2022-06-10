@@ -31,6 +31,7 @@ void setup() {
   doubleDownAsk = false;
   workable = true;
   naturalBlackjack = false;
+  roundOver = false;
 
 
 
@@ -115,7 +116,13 @@ void draw() {
     }
     if (!beforePlay && thePlayer.getHand().getHandLength() == 2 && workable && !split && !doubleDown) {
       checkBlackjack();
-      if (!naturalBlackjack) {
+      if (
+        // Checks if the hand is a natural blackjack and if you have enough money in wallet
+        !naturalBlackjack 
+        && ((thePlayer.getWallet() > thePlayer.getbet()) ||
+        (thePlayer.getWallet() == thePlayer.getbet()))
+        && !roundOver
+        ) {
         if (
           thePlayer.getHand().getCard(0).getValue() == thePlayer.getHand().getCard(1).getValue() &&
           thePlayer.getHand().getCard(0).getStringValue().equals(thePlayer.getHand().getCard(1).getStringValue()) &&
