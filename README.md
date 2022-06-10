@@ -193,3 +193,9 @@ Sloan --> Began fixing Ace functionality on splits
 Nurdaulet --> Fixed bug with betting during slits and double downs: You were able to DD and split when you had less money in the wallet than the bet, thus allowing glitched money to come in. Added a check that sees if the current wallet is equal to or greater than the bet to allow DD and Splits.
 
 Sloan --> Added more display functionality with split having more messages inside the message center. Also reworked how the reset logic goes. New bakcground image.
+
+
+-=-=-= 6/10 =-=-=-
+
+
+Nurdaulet --> Fixed bug with splitting: When both hands are won, money was not equally distributed

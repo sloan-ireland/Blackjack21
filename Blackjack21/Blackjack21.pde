@@ -34,7 +34,8 @@ void setup() {
   workable = true;
   naturalBlackjack = false;
   roundOver = false;
-
+  lostHandOne = false;     
+  lostHandTwo = false;
 
 
   fill(255);
@@ -365,8 +366,7 @@ void splitPlay() {
   if (lostHandOne && lostHandTwo) {
     thePlayer.makeBet(0);
   } else if (lostHandOne || lostHandTwo) {
-    thePlayer.addWallet((int)(0.5 * thePlayer.getbet()));
-    thePlayer.makeBet(0);
+    thePlayer.addWallet((int)(thePlayer.getbet()));
   } else {
     int push = 0;
     if (theHouse.getHand().getSum() == splitHand.getSum()) {
