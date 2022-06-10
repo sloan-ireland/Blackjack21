@@ -16,11 +16,9 @@ boolean oneHand = false;
 boolean lostHandOne = false;
 boolean lostHandTwo = false;
 boolean naturalBlackjack = false;
-boolean reset = false;
 PImage back;
-PImage green;
+
 void setup() {
-  green = loadImage("Cards/blue.png");
   playerTurn = true;
   back = loadImage("Cards/back.png");
   back.resize(180, 261);
@@ -141,14 +139,9 @@ void draw() {
         }
       }
     }
-    if (reset) {
-      image(green, 350,200);
-      textSize(40);
-      text("Would You Like to Play Again\nPress R", 370,300);
+    if (troll) {
     }
   }
-  if (troll) {
-    }
 }
 
 
@@ -220,7 +213,6 @@ void keyPressed() {
   }
   if (roundOver) {
     if (key == 'r') {
-      reset = false;
       noLoop();
       setup();
       theHouse = new Dealer();
@@ -384,7 +376,9 @@ void splitPlay() {
     }
   }
   thePlayer.makeBet(0);
-  reset = true;
+  textSize(40);
+  delay(500);
+  text("Want to play again? \nPress R", 20, 700);
   roundOver = true;
 }
 
@@ -415,11 +409,15 @@ void endRound(int mode, boolean wasBlackjack) {
   }
   thePlayer.makeBet(0);
   if (thePlayer.getWallet() != 0 && !split) {
-    reset = true;
+    textSize(40);
+    delay(500);
+    text("Want to play again? \nPress R", 20, 700);
     roundOver = true;
   }
   if (thePlayer.getWallet() != 0 && split) {
-    reset = true;
+    textSize(40);
+    delay(500);
+    text("Want to play again? \nPress R", 20, 700);
     roundOver = true;
   }
 }
