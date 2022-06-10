@@ -68,7 +68,7 @@ public class Hand {
   return false;
   }
   public void Hit(Deck daDeck) {
-    if (daDeck.size() == 0) {
+    if (daDeck.size() < 5) {
         daDeck.refill();
     }
     Card daCard = masterDeck.getTopCard();
