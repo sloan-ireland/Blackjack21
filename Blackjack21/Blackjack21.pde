@@ -324,6 +324,7 @@ void split() {
   splitHand.Hit(masterDeck);
   if (thePlayer.getHand().getCard(0).countedAs() == 1) {
     thePlayer.getHand().getCard(0).countedAs(11);
+    thePlayer.getHand().setSum(11);
   }
   thePlayer.getHand().Hit(masterDeck);
   thePlayer.getHand().setSum(thePlayer.getHand().getSum() - splitHand.getCard(0).getValue());
@@ -357,16 +358,17 @@ void splitPlay() {
   while (theHouse.getHand().getSum() < 17) {
     theHouse.getHand().Hit(masterDeck);
   }
-  if (theHouse.getHand().getSum() > splitHand.getSum()) {
+  if (theHouse.getHand().getSum() > splitHand.getSum() && (theHouse.getHand().getSum() < 21 || theHouse.getHand().getSum() == 21)) {
     lostHandOne = true;
   }
-  if (theHouse.getHand().getSum() > thePlayer.getHand().getSum()) {
+  if (theHouse.getHand().getSum() > thePlayer.getHand().getSum() && (theHouse.getHand().getSum() < 21 || theHouse.getHand().getSum() == 21)) {
     lostHandOne = true;
   }
+  
   if (lostHandOne && lostHandTwo) {
-    thePlayer.makeBet(0);
+    thePlayer.makeBet(thePlayer.getbet());
   } else if (lostHandOne || lostHandTwo) {
-    thePlayer.addWallet((int)(thePlayer.getbet()));
+      thePlayer.addWallet((int)(thePlayer.getbet()));
   } else {
     int push = 0;
     if (theHouse.getHand().getSum() == splitHand.getSum()) {
