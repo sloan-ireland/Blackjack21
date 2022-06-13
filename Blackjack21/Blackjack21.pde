@@ -362,7 +362,7 @@ void splitPlay() {
     lostHandOne = true;
   }
   if (theHouse.getHand().getSum() > thePlayer.getHand().getSum() && (theHouse.getHand().getSum() < 21 || theHouse.getHand().getSum() == 21)) {
-    lostHandOne = true;
+    lostHandTwo = true;
   }
   
   if (lostHandOne && lostHandTwo) {
