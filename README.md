@@ -199,3 +199,9 @@ Sloan --> Added more display functionality with split having more messages insid
 
 
 Nurdaulet --> Fixed bug with splitting: When both hands are won, money was not equally distributed
+
+
+-=-=-= 6/12 =-=-=-
+
+
+Nurdaulet & Sloan (Streaming session) --> Finalized split betting mechanics and restart screen. Also, fixed the ACE bug with split hand. Finalized UML and Prototype
