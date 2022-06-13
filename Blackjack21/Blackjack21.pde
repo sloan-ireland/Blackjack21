@@ -327,7 +327,9 @@ void split() {
     thePlayer.getHand().setSum(11);
   }
   thePlayer.getHand().Hit(masterDeck);
-  thePlayer.getHand().setSum(thePlayer.getHand().getSum() - splitHand.getCard(0).getValue());
+  if (thePlayer.getHand().getCard(0).countedAs() != 11) {
+    thePlayer.getHand().setSum(thePlayer.getHand().getSum() - splitHand.getCard(0).getValue());
+  }
   thePlayer.addWallet(thePlayer.getbet());
   thePlayer.makeBet(2 * thePlayer.getbet());
   messageCenter("Playing 1st Hand");
