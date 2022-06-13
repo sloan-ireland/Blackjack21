@@ -21,7 +21,6 @@ PImage back;
 PImage green;
 PImage frame;
 void setup() {
-  frame = loadImage("Cards/frame.png");
   green = loadImage("Cards/blue.png");
   playerTurn = true;
   back = loadImage("Cards/back.png");

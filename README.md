@@ -207,3 +207,6 @@ Sloan --> Experimented with debugger to fix issue within the split method.
 
 
 Nurdaulet & Sloan (Streaming session) --> Finalized split betting mechanics and blue restart screen. Also, fixed the ACE bug with split hand. Finalized UML and Prototype
+
+
+PROJECT FINISHED
