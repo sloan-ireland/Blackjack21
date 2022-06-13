@@ -19,7 +19,9 @@ boolean naturalBlackjack = false;
 boolean reset = false;
 PImage back;
 PImage green;
+PImage frame;
 void setup() {
+  frame = loadImage("Cards/frame.png");
   green = loadImage("Cards/blue.png");
   playerTurn = true;
   back = loadImage("Cards/back.png");
@@ -133,7 +135,7 @@ void draw() {
           ) {
           splitAsk = true;
           playerTurn = false;
-          messageCenter("Would you like to split your hand?\nY/N");
+          messageCenter("Would you like to split your hand?\nY/N\nNote this action will double\nyour bet");
         }
         if (thePlayer.getHand().getSum()  == 10 || thePlayer.getHand().getSum() == 11) {
           playerTurn = false;
@@ -143,9 +145,11 @@ void draw() {
       }
     }
     if (reset) {
-      image(green, 350,200);
+      green.resize(630,200);
+      image(green, 350,220);
       textSize(40);
-      text("Would You Like to Play Again\nPress R", 370,300);
+      fill(255);
+      text("Would You Like to Play Again?\nPress R", 370,300);
     }
   }
   if (troll) {
