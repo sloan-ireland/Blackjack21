@@ -366,7 +366,7 @@ void splitPlay() {
   }
   
   if (lostHandOne && lostHandTwo) {
-    thePlayer.makeBet(thePlayer.getbet());
+    thePlayer.makeBet(0);
   } else if (lostHandOne || lostHandTwo) {
       thePlayer.addWallet((int)(thePlayer.getbet()));
   } else {
